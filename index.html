@@ -1,23 +1,59 @@
-<div class="contact-container">
-    <h2>İletişim Formu</h2>
-    <form action="#">
-        <label for="name">Ad Soyad</label>
-        <input type="text" id="name" name="name" placeholder="Adınızı giriniz..." required>
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>İletişim Formu</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
 
-        <label for="email">E-posta</label>
-        <input type="email" id="email" name="email" placeholder="E-posta adresinizi giriniz..." required>
+  <div class="contact-container">
+    <h2>İletişim</h2>
 
-        <label for="subject">Konu</label>
-        <select id="subject" name="subject">
-            <option value="">Seçiniz...</option>
-            <option value="is-teklifi">İş Teklifi</option>
-            <option value="soru">Soru</option>
-            <option value="geri-bildirim">Geri Bildirim</option>
-        </select>
+    <form>
+      <label for="adsoyad">Ad Soyad:</label>
+      <input type="text" id="adsoyad" placeholder="Merve Sueda Aydın" />
 
-        <label for="message">Mesaj</label>
-        <textarea id="message" name="message" rows="5" placeholder="Mesajınızı buraya yazınız..."></textarea>
+      <label for="email">E-posta:</label>
+      <input type="email" id="email" placeholder="ornek@mail.com" />
 
+      <label for="sifre">Başvuru Takip Şifresi:</label>
+      <input type="password" id="sifre" placeholder="Şifrenizi girin" />
+
+      <label>İletişim Tercihi:</label>
+      <div class="option-box">
+        <label><input type="radio" name="iletisim" checked /> Bana e-posta ile ulaşın — mervesueda2005@gmail.com</label>
+        <label><input type="radio" name="iletisim" /> Bana telefonla ulaşın — +90 532 847 19 63</label>
+      </div>
+
+      <label>İlgi Alanları / Yetenekler:</label>
+      <div class="option-box">
+        <label><input type="checkbox" /> HTML</label>
+        <label><input type="checkbox" /> CSS</label>
+        <label><input type="checkbox" /> Algoritma</label>
+      </div>
+
+      <label for="konu">Konu:</label>
+      <select id="konu">
+        <option value="" disabled selected>Lütfen bir konu seçin...</option>
+        <option>İş Teklifi</option>
+        <option>Soru</option>
+        <option>Geri Bildirim</option>
+      </select>
+
+      <label for="dosya">CV veya Fotoğraf Yükle:</label>
+      <input type="file" id="dosya" />
+
+      <label for="mesaj">Mesajınız:</label>
+      <textarea id="mesaj" placeholder="Mesajınızı buraya yazabilirsiniz..."></textarea>
+
+      <div class="btn-group">
         <button type="submit">Gönder</button>
+        <button type="reset">Temizle</button>
+      </div>
     </form>
-</div>
+  </div>
+
+</body>
+</html>
