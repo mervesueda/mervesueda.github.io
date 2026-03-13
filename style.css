@@ -1,15 +1,23 @@
+/* Formu kapsayan container */
 .contact-container{
-    width: 50%;
-    margin: auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
+    width:50%;
+    margin:auto;
+    padding:20px;
+    border:1px solid black;
+    border-radius:8px;
 }
 
+/* Form elemanları */
 input, select, textarea{
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    box-sizing: border-box;
+    width:100%;
+    padding:8px;
+    margin-bottom:10px;
 }
 
+/* Gönder butonu */
+button{
+    background-color:gray;
+    border:none;
+    padding:10px 20px;
+    color:white;
+}
