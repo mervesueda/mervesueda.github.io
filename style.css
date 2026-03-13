@@ -1,56 +1,82 @@
-/* Ana Konteyner Ayarları */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #fdf0f4;
+}
+
 .contact-container {
-    width: 600px;           /* Belge gereksinimi: 600px */
-    margin: 40px auto;      /* Belge gereksinimi: Ortalamak için auto */
-    padding: 25px;          /* Belge gereksinimi: İç boşluk */
-    border: 2px solid #ddd; /* Belge gereksinimi: Belirgin kenarlık */
-    border-radius: 12px;    /* Belge gereksinimi: Köşe yuvarlaması */
-    background-color: #f9f9f9;
-    font-family: Arial, sans-serif;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Daha profesyonel görünüm için */
+  width: 550px;
+  margin: 60px auto;
+  background-color: #ffffff;
+  padding: 35px;
+  border: 1px solid #f0c0cc;
+  border-radius: 10px;
 }
 
-.contact-container h2 {
-    text-align: center;
-    color: #333;
+h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #c0607a;
 }
 
-/* Label Ayarları */
-.contact-container label {
-    display: block;
-    margin-bottom: 8px;     /* Yazı ile kutu arasındaki boşluk */
-    font-weight: bold;
-    color: #555;
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 14px;
+  color: #555;
 }
 
-/* Form Elemanları (input, select, textarea) */
-.contact-container input, 
-.contact-container select, 
-.contact-container textarea {
-    width: 100%;            /* Belge gereksinimi: Tam genişlik */
-    padding: 12px;          /* Belge gereksinimi: Ferah görünüm için iç boşluk */
-    margin-bottom: 20px;    /* Belge gereksinimi: Elemanlar arası boşluk */
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    box-sizing: border-box; /* Padding'in genişliği bozmaması için kritik */
-    font-size: 14px;
+input, select, textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 16px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
 }
 
-/* Gönder Butonu */
-.contact-container button[type="submit"] {
-    background-color: #2ecc71; /* Belge gereksinimi: Arka plan rengi */
-    color: white;
-    border: none;
-    padding: 12px 25px;      /* Belge gereksinimi: Padding ile büyütme */
-    border-radius: 6px;      /* Belge gereksinimi: Köşe yuvarlaması */
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: bold;
-    width: 100%;             /* Görseldeki gibi tam genişlik butonu */
-    transition: background 0.3s ease;
+textarea {
+  height: 110px;
+  resize: vertical;
 }
 
-/* Hover Efekti */
-.contact-container button[type="submit"]:hover {
-    background-color: #27ae60;
+.option-box {
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 12px;
+  margin-bottom: 16px;
+  background-color: #fdf5f7;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.option-box label {
+  margin-bottom: 0;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.btn-group {
+  display: flex;
+  gap: 10px;
+  margin-top: 5px;
+}
+
+.btn-group button {
+  flex: 1;
+  padding: 11px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.btn-group button[type="submit"] {
+  background-color: #d96080;
+  color: white;
+}
+
+.btn-group button[type="reset"] {
+  background-color: #e8a0b0;
+  color: white;
 }
