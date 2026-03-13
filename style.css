@@ -1,23 +1,56 @@
-/* Formu kapsayan container */
-.contact-container{
-    width:50%;
-    margin:auto;
-    padding:20px;
-    border:1px solid black;
-    border-radius:8px;
+/* Ana Konteyner Ayarları */
+.contact-container {
+    width: 600px;           /* Belge gereksinimi: 600px */
+    margin: 40px auto;      /* Belge gereksinimi: Ortalamak için auto */
+    padding: 25px;          /* Belge gereksinimi: İç boşluk */
+    border: 2px solid #ddd; /* Belge gereksinimi: Belirgin kenarlık */
+    border-radius: 12px;    /* Belge gereksinimi: Köşe yuvarlaması */
+    background-color: #f9f9f9;
+    font-family: Arial, sans-serif;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Daha profesyonel görünüm için */
 }
 
-/* Form elemanları */
-input, select, textarea{
-    width:100%;
-    padding:8px;
-    margin-bottom:10px;
+.contact-container h2 {
+    text-align: center;
+    color: #333;
 }
 
-/* Gönder butonu */
-button{
-    background-color:gray;
-    border:none;
-    padding:10px 20px;
-    color:white;
+/* Label Ayarları */
+.contact-container label {
+    display: block;
+    margin-bottom: 8px;     /* Yazı ile kutu arasındaki boşluk */
+    font-weight: bold;
+    color: #555;
+}
+
+/* Form Elemanları (input, select, textarea) */
+.contact-container input, 
+.contact-container select, 
+.contact-container textarea {
+    width: 100%;            /* Belge gereksinimi: Tam genişlik */
+    padding: 12px;          /* Belge gereksinimi: Ferah görünüm için iç boşluk */
+    margin-bottom: 20px;    /* Belge gereksinimi: Elemanlar arası boşluk */
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-sizing: border-box; /* Padding'in genişliği bozmaması için kritik */
+    font-size: 14px;
+}
+
+/* Gönder Butonu */
+.contact-container button[type="submit"] {
+    background-color: #2ecc71; /* Belge gereksinimi: Arka plan rengi */
+    color: white;
+    border: none;
+    padding: 12px 25px;      /* Belge gereksinimi: Padding ile büyütme */
+    border-radius: 6px;      /* Belge gereksinimi: Köşe yuvarlaması */
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    width: 100%;             /* Görseldeki gibi tam genişlik butonu */
+    transition: background 0.3s ease;
+}
+
+/* Hover Efekti */
+.contact-container button[type="submit"]:hover {
+    background-color: #27ae60;
 }
