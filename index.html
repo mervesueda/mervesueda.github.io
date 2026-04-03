@@ -298,11 +298,10 @@
                     Şimdi ise CSS seçicilerini kullanarak grup ve hiyerarşik seçimler yapmayı görüyoruz.
                 </p>
 
-                <!-- ─── LAB LİNKLERİ ─── -->
                 <div class="lab-link-kutu">
                     <a href="flexbox.html" target="_blank">🔗 Lab 4 — Flexbox Uygulaması</a>
-                    <!-- YENİ: Lab 5 butonu — tek tıkla lab-position.html açılır -->
-                    <a href="lab_position.html">📌 Lab 5 — CSS Position Duyuru Kartı</a>
+                    <!-- ↓ href TAM OLARAK lab-position.html — klasördeki dosya adıyla eşleşmeli -->
+                    <a href="lab-position.html">📌 Lab 5 — CSS Position Duyuru Kartı</a>
                 </div>
             </section>
 
@@ -317,18 +316,10 @@
                 </p>
 
                 <ul class="sosyal-linkler">
-                    <li>
-                        <a href="https://github.com/mervesueda" target="_blank">⬡ GitHub</a>
-                    </li>
-                    <li>
-                        <a href="https://linkedin.com/in/mervesuedaaydin" target="_blank">in LinkedIn</a>
-                    </li>
-                    <li>
-                        <a href="https://kaggle.com/mervesuedaaydn" target="_blank">◈ Kaggle</a>
-                    </li>
-                    <li>
-                        <a href="mailto:mervesueda2005@gmail.com">✉ E-posta</a>
-                    </li>
+                    <li><a href="https://github.com/mervesueda" target="_blank">⬡ GitHub</a></li>
+                    <li><a href="https://linkedin.com/in/mervesuedaaydin" target="_blank">in LinkedIn</a></li>
+                    <li><a href="https://kaggle.com/mervesuedaaydn" target="_blank">◈ Kaggle</a></li>
+                    <li><a href="mailto:mervesueda2005@gmail.com">✉ E-posta</a></li>
                 </ul>
             </aside>
 
@@ -393,12 +384,12 @@
 
     <script>
         function goster(panel) {
-            document.getElementById('ana-panel').style.display  = panel === 'ana'       ? 'block' : 'none';
-            document.getElementById('iletisim-panel').style.display = panel === 'iletisim' ? 'block' : 'none';
+            document.getElementById('ana-panel').style.display      = panel === 'ana'       ? 'block' : 'none';
+            document.getElementById('iletisim-panel').style.display = panel === 'iletisim'  ? 'block' : 'none';
             document.querySelectorAll('nav ul li a').forEach(function(a) {
                 a.classList.remove('aktif');
-                if ((panel === 'ana'       && a.textContent.trim() === 'Ana Sayfa') ||
-                    (panel === 'iletisim'  && a.textContent.trim() === 'İletişim')) {
+                if ((panel === 'ana'      && a.textContent.trim() === 'Ana Sayfa') ||
+                    (panel === 'iletisim' && a.textContent.trim() === 'İletişim')) {
                     a.classList.add('aktif');
                 }
             });
