@@ -19,7 +19,6 @@
             --vurgu-koyu: #4338ca;
             --beyaz: #ffffff;
             --metin-koyu: #1e1b4b;
-            --metin-orta: #4b5563;
             --arka: #f1f0f9;
         }
 
@@ -35,7 +34,7 @@
         }
 
         /* ============================================================
-           FIXED ÖĞE 1 — Sol üst "Ana Sayfaya Dön" butonu
+           FIXED 1 — Sol üst "Ana Sayfaya Dön" (gerçek <a> linki)
         ============================================================ */
         .fixed-geri {
             position: fixed;
@@ -49,23 +48,18 @@
             border-radius: 6px;
             font-size: 13px;
             font-family: Georgia, serif;
-            cursor: pointer;
             transition: background 0.25s, transform 0.2s;
             box-shadow: 0 2px 10px rgba(99,102,241,0.3);
+            cursor: pointer;
         }
-
         .fixed-geri:hover {
             background: var(--vurgu-koyu);
             transform: translateY(-2px);
-            cursor: pointer;
         }
-
-        .fixed-geri:active {
-            transform: translateY(0);
-        }
+        .fixed-geri:active { transform: translateY(0); }
 
         /* ============================================================
-           FIXED ÖĞE 2 — Sağ alt "Yardımcı Menü" butonu
+           FIXED 2 — Sağ alt "Yardımcı Menü" (tıklanabilir toggle)
         ============================================================ */
         .fixed-yardim {
             position: fixed;
@@ -81,17 +75,59 @@
             cursor: pointer;
             transition: background 0.25s, transform 0.2s, box-shadow 0.25s;
             box-shadow: 0 4px 18px rgba(99,102,241,0.35);
+            user-select: none;
         }
-
         .fixed-yardim:hover {
             background: var(--vurgu-koyu);
             transform: translateY(-3px);
             box-shadow: 0 8px 24px rgba(99,102,241,0.45);
-            cursor: pointer;
+        }
+
+        /* Yardımcı menü açılır kutusu */
+        .yardim-panel {
+            position: fixed;
+            bottom: 72px;
+            right: 22px;
+            z-index: 999;
+            background: var(--beyaz);
+            border: 1px solid #e0e7ff;
+            border-radius: 10px;
+            padding: 14px 18px;
+            box-shadow: 0 8px 28px rgba(99,102,241,0.18);
+            font-size: 13px;
+            font-family: Georgia, serif;
+            color: var(--metin-koyu);
+            min-width: 190px;
+            display: none;
+        }
+        .yardim-panel.acik {
+            display: block;
+            animation: fadeUp 0.2s ease;
+        }
+        .yardim-panel strong {
+            display: block;
+            color: var(--vurgu);
+            margin-bottom: 8px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid #e0e7ff;
+            font-size: 13px;
+        }
+        .yardim-panel ul { list-style: none; }
+        .yardim-panel ul li {
+            padding: 5px 0;
+            font-size: 12.5px;
+            color: #4b5563;
+            border-bottom: 1px solid #f3f4f6;
+        }
+        .yardim-panel ul li:last-child { border-bottom: none; }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(8px); }
+            to   { opacity: 1; transform: translateY(0); }
         }
 
         /* ============================================================
-           ANA İÇERİK ALANI
+           ANA ALAN
         ============================================================ */
         .ana-alan {
             width: 100%;
@@ -107,24 +143,22 @@
            KART KAPSAYICI — position: relative (zorunlu şart)
         ============================================================ */
         .kart-kapsayici {
-            position: relative;   /* ← relative: absolute öğeler buna göre konumlanır */
+            position: relative;
             width: 100%;
             min-height: 430px;
             background: linear-gradient(135deg, var(--kart-bg-1) 0%, var(--kart-bg-2) 50%, var(--kart-bg-3) 100%);
             border-radius: 20px;
             padding: 48px 44px 52px;
             box-shadow: 0 8px 40px rgba(99,102,241,0.15);
-            overflow: visible;
-            cursor: default;
             transition: box-shadow 0.35s;
+            animation: asagiGel 0.6s ease both;
         }
-
         .kart-kapsayici:hover {
             box-shadow: 0 16px 56px rgba(99,102,241,0.22);
-            cursor: pointer;
+            cursor: default;
         }
 
-        /* Dekoratif daire — z-index ile arkada */
+        /* Dekoratif daire — z-index: 0 (arkada kalır) */
         .kart-kapsayici::before {
             content: '';
             position: absolute;
@@ -134,14 +168,14 @@
             height: 200px;
             background: rgba(255,255,255,0.35);
             border-radius: 50%;
-            z-index: 0;   /* ← z-index: arkada kalır */
+            z-index: 0;
         }
 
+        /* Metin içeriği — z-index: 1 (dairenin önünde) */
         .kart-icerik {
             position: relative;
-            z-index: 1;   /* ← z-index: dairenin önünde */
+            z-index: 1;
         }
-
         .kart-baslik {
             font-size: 28px;
             font-weight: bold;
@@ -149,7 +183,6 @@
             margin-bottom: 18px;
             line-height: 1.35;
         }
-
         .kart-aciklama {
             font-size: 14px;
             color: var(--metin-koyu);
@@ -158,134 +191,108 @@
         }
 
         /* ============================================================
-           ABSOLUTE ÖĞE 1 — "Ücretsiz" rozeti (sol üst)
+           ABSOLUTE 1 — "Ücretsiz" rozeti (sol üst)
         ============================================================ */
         .rozet-ucretsiz {
-            position: absolute;   /* ← absolute */
+            position: absolute;
             top: 18px;
             left: 24px;
             z-index: 3;
             background: var(--rozet-sari);
             color: var(--rozet-sari-metin);
             font-size: 12px;
-            font-family: Georgia, serif;
             padding: 5px 12px;
             border-radius: 20px;
             font-weight: bold;
             cursor: pointer;
             transition: transform 0.2s, box-shadow 0.2s;
             box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            animation: asagiGel 0.7s 0.15s ease both;
         }
-
         .rozet-ucretsiz:hover {
             transform: scale(1.08);
             box-shadow: 0 4px 14px rgba(0,0,0,0.13);
-            cursor: pointer;
         }
 
         /* ============================================================
-           ABSOLUTE ÖĞE 2 — "24 Nisan" tarih rozeti (sağ üst)
+           ABSOLUTE 2 — "24 Nisan" tarih rozeti (sağ üst)
         ============================================================ */
         .rozet-tarih {
-            position: absolute;   /* ← absolute */
+            position: absolute;
             top: 18px;
             right: 24px;
             z-index: 3;
             background: var(--rozet-yesil);
             color: var(--rozet-yesil-metin);
             font-size: 12px;
-            font-family: Georgia, serif;
             padding: 5px 14px;
             border-radius: 20px;
             font-weight: bold;
             cursor: pointer;
             transition: transform 0.2s, box-shadow 0.2s;
             box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            animation: asagiGel 0.7s 0.25s ease both;
         }
-
         .rozet-tarih:hover {
             transform: scale(1.08);
             box-shadow: 0 4px 14px rgba(0,0,0,0.13);
-            cursor: pointer;
         }
 
         /* ============================================================
-           ABSOLUTE ÖĞE 3 — "Konum: Konferans Salonu" bilgi kutusu (orta)
+           ABSOLUTE 3 — "Konum: Konferans Salonu" (orta sağ)
         ============================================================ */
         .rozet-konum {
-            position: absolute;   /* ← absolute */
+            position: absolute;
             top: 52%;
             right: 40px;
             z-index: 3;
             background: rgba(255,255,255,0.92);
             color: var(--metin-koyu);
             font-size: 13px;
-            font-family: Georgia, serif;
             padding: 10px 18px;
             border-radius: 10px;
             box-shadow: 0 4px 16px rgba(99,102,241,0.12);
             cursor: pointer;
             transition: transform 0.25s, box-shadow 0.25s;
             backdrop-filter: blur(4px);
+            animation: asagiGel 0.7s 0.35s ease both;
         }
-
         .rozet-konum:hover {
             transform: translateY(-4px);
             box-shadow: 0 10px 28px rgba(99,102,241,0.2);
-            cursor: pointer;
         }
 
         /* ============================================================
-           ABSOLUTE ÖĞE 4 — "Son Kayıt" uyarı rozeti (sağ alt)
+           ABSOLUTE 4 — "Son Kayıt" (sağ alt, nabız animasyonu)
         ============================================================ */
         .rozet-sonkayit {
-            position: absolute;   /* ← absolute */
+            position: absolute;
             bottom: 20px;
             right: 24px;
             z-index: 3;
             background: var(--rozet-mavi);
             color: var(--rozet-mavi-metin);
             font-size: 12px;
-            font-family: Georgia, serif;
             padding: 6px 14px;
             border-radius: 20px;
             font-weight: bold;
             cursor: pointer;
             transition: transform 0.2s;
             animation: nabiz 2s ease-in-out infinite;
-            box-shadow: 0 2px 8px rgba(99,102,241,0.15);
         }
-
-        .rozet-sonkayit:hover {
-            transform: scale(1.1);
-            cursor: pointer;
-        }
+        .rozet-sonkayit:hover { transform: scale(1.1); }
 
         /* ============================================================
-           ANIMASYONLAR
+           ANİMASYONLAR
         ============================================================ */
-
-        /* Nabız animasyonu — Son Kayıt rozeti */
         @keyframes nabiz {
             0%, 100% { box-shadow: 0 2px 8px rgba(99,102,241,0.15); }
-            50%       { box-shadow: 0 2px 18px rgba(99,102,241,0.45); }
+            50%       { box-shadow: 0 2px 20px rgba(99,102,241,0.5); }
         }
-
-        /* Yukarıdan süzülme — sayfa yüklenince kart */
         @keyframes asagiGel {
-            from { opacity: 0; transform: translateY(-24px); }
+            from { opacity: 0; transform: translateY(-18px); }
             to   { opacity: 1; transform: translateY(0); }
         }
-
-        .kart-kapsayici {
-            animation: asagiGel 0.7s ease both;
-        }
-
-        /* Rozetler için gecikmeli giriş */
-        .rozet-ucretsiz  { animation: asagiGel 0.7s 0.15s ease both; }
-        .rozet-tarih      { animation: asagiGel 0.7s 0.25s ease both; }
-        .rozet-konum      { animation: asagiGel 0.7s 0.35s ease both; }
-        .rozet-sonkayit   { animation: nabiz 2s 0.45s ease-in-out infinite; }
 
         /* ============================================================
            FOOTER
@@ -294,31 +301,40 @@
             font-size: 12.5px;
             color: #9ca3af;
             text-align: center;
-            padding-bottom: 20px;
         }
     </style>
 </head>
 <body>
 
-    <!-- FIXED 1: Sol üst geri butonu -->
+    <!-- FIXED 1: Gerçek <a> etiketi ile ana sayfaya yönlendirme -->
     <a class="fixed-geri" href="index.html">Ana Sayfaya Dön</a>
 
-    <!-- FIXED 2: Sağ alt yardımcı menü -->
-    <div class="fixed-yardim">Yardımcı Menü</div>
+    <!-- FIXED 2: Tıklanabilir yardımcı menü -->
+    <div class="fixed-yardim" id="yardimButon">Yardımcı Menü</div>
+
+    <!-- Yardımcı menü paneli -->
+    <div class="yardim-panel" id="yardimPanel">
+        <strong>CSS Position Özeti</strong>
+        <ul>
+            <li>relative → kart kapsayıcı</li>
+            <li>absolute → 4 rozet</li>
+            <li>fixed → bu iki buton</li>
+            <li>z-index → daire arkada, rozetler önde</li>
+        </ul>
+    </div>
 
     <!-- Ana alan -->
     <div class="ana-alan">
 
-        <!-- KART — position: relative kapsayıcı -->
+        <!-- KART: position relative -->
         <div class="kart-kapsayici">
 
-            <!-- ABSOLUTE 1: Ücretsiz rozeti -->
+            <!-- ABSOLUTE 1 -->
             <div class="rozet-ucretsiz">Ücretsiz</div>
-
-            <!-- ABSOLUTE 2: Tarih rozeti -->
+            <!-- ABSOLUTE 2 -->
             <div class="rozet-tarih">24 Nisan</div>
 
-            <!-- Kart içeriği (z-index: 1, dairenin önünde) -->
+            <!-- İçerik z-index:1 -->
             <div class="kart-icerik">
                 <h2 class="kart-baslik">Teknoloji Topluluğu Etkinliği</h2>
                 <p class="kart-aciklama">
@@ -329,18 +345,32 @@
                 </p>
             </div>
 
-            <!-- ABSOLUTE 3: Konum bilgisi -->
+            <!-- ABSOLUTE 3 -->
             <div class="rozet-konum">Konum: Konferans Salonu</div>
-
-            <!-- ABSOLUTE 4: Son kayıt -->
+            <!-- ABSOLUTE 4 -->
             <div class="rozet-sonkayit">Son Kayıt</div>
 
         </div>
 
-        <!-- Footer -->
         <div class="footer-alan">2026 - LAB Position Örnek Çalışması</div>
 
     </div>
+
+    <script>
+        var buton = document.getElementById('yardimButon');
+        var panel = document.getElementById('yardimPanel');
+
+        buton.addEventListener('click', function(e) {
+            e.stopPropagation();
+            panel.classList.toggle('acik');
+        });
+
+        document.addEventListener('click', function(e) {
+            if (!panel.contains(e.target) && !buton.contains(e.target)) {
+                panel.classList.remove('acik');
+            }
+        });
+    </script>
 
 </body>
 </html>
