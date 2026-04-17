@@ -150,6 +150,26 @@
         }
         .lab-link-kutu a:hover { background: var(--renk-vurgu-koyu); }
 
+        /* Lab 6 grup — yan yana iki buton */
+        .lab6-grup {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .lab6-grup a {
+            flex: 1;
+            min-width: 180px;
+            text-align: center;
+        }
+
+        .lab6-etiket {
+            font-size: 12px;
+            color: #6b82ab;
+            margin-top: 2px;
+            margin-bottom: 2px;
+        }
+
         footer {
             text-align: center;
             font-size: 12.5px;
@@ -300,8 +320,14 @@
 
                 <div class="lab-link-kutu">
                     <a href="flexbox.html" target="_blank">🔗 Lab 4 — Flexbox Uygulaması</a>
-                    <!-- ↓ href TAM OLARAK lab-position.html — klasördeki dosya adıyla eşleşmeli -->
                     <a href="lab-position.html">📌 Lab 5 — CSS Position Duyuru Kartı</a>
+
+                    <!-- Lab 6 — JavaScript Uygulamaları -->
+                    <p class="lab6-etiket">🧪 Lab 6 — JavaScript Uygulamaları</p>
+                    <div class="lab6-grup">
+                        <a href="uygulama1.html">📊 Uygulama 1 — Not Hesaplama</a>
+                        <a href="uygulama2.html">🔄 Uygulama 2 — Birim Dönüştürücü</a>
+                    </div>
                 </div>
             </section>
 
