@@ -3,181 +3,195 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Öğrenci Not Hesaplama</title>
+    <title>Öğrenci Not Hesaplama — Modern Tasarım</title>
     <style>
+        /* Modern Özgün Renk Paleti (Birim Dönüştürücü ile Aynı) */
         :root {
-            --renk-bg:         #f0f6ff;
-            --renk-beyaz:      #ffffff;
-            --renk-sinir:      #c8d8f0;
-            --renk-vurgu:      #4a7fcb;
-            --renk-vurgu-koyu: #2f5fa8;
-            --renk-metin:      #2c3e6b;
-            --renk-acik:       #edf4ff;
+            --ana-bg: #f4f7fa;
+            --kart-bg: #ffffff;
+            --primary: #2563eb; 
+            --primary-hover: #1d4ed8;
+            --accent: #06b6d4; 
+            --text-ana: #1e293b; 
+            --text-ikincil: #64748b;
+            --border: #e2e8f0;
+            --sonuc-bg: #f0fdf4; 
+            --sonuc-text: #166534;
+            --hata-renk: #e11d48;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: Georgia, serif;
-            background: var(--renk-bg);
-            color: var(--renk-metin);
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: var(--ana-bg);
+            color: var(--text-ana);
+            line-height: 1.6;
             min-height: 100vh;
         }
 
+        /* Navigasyon */
         nav {
-            background: var(--renk-beyaz);
-            border-bottom: 1px solid var(--renk-sinir);
-            padding: 14px 24px;
+            background: var(--kart-bg);
+            padding: 1rem 2rem;
             display: flex;
-            align-items: center;
             justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
         }
 
-        nav .logo {
-            font-size: 17px;
-            font-weight: bold;
-            color: var(--renk-metin);
+        .logo {
+            font-weight: 800;
+            font-size: 1.2rem;
+            color: var(--primary);
+            letter-spacing: -0.5px;
         }
 
-        nav ul { list-style: none; }
-        nav ul li { display: inline-block; margin-left: 6px; }
+        nav ul { list-style: none; display: flex; gap: 20px; }
         nav ul li a {
             text-decoration: none;
-            color: var(--renk-metin);
-            font-size: 14px;
-            padding: 6px 14px;
-            border-radius: 4px;
+            color: var(--text-ikincil);
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.3s;
         }
-        nav ul li a:hover {
-            background: var(--renk-vurgu);
-            color: #fff;
+        nav ul li a:hover { color: var(--primary); }
+
+        /* Sayfa ve Kart Yapısı */
+        .sayfa {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 0 20px;
         }
 
-        .sayfa {
-            max-width: 680px;
-            margin: 36px auto;
-            background: var(--renk-beyaz);
-            border: 1px solid var(--renk-sinir);
-            border-radius: 8px;
-            padding: 32px;
+        .hesapla-kart {
+            background: var(--kart-bg);
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--border);
         }
 
         h1 {
-            font-size: 22px;
-            color: #1a2f5e;
-            margin-bottom: 24px;
-            padding-bottom: 14px;
-            border-bottom: 1px solid var(--renk-sinir);
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 25px;
+            color: var(--text-ana);
+            border-left: 4px solid var(--accent);
+            padding-left: 15px;
         }
 
+        /* Form Elemanları */
         .form-grup {
-            margin-bottom: 16px;
+            margin-bottom: 20px;
         }
 
         .form-grup label {
             display: block;
-            font-size: 13.5px;
-            font-weight: bold;
-            color: #1a2f5e;
-            margin-bottom: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-ikincil);
         }
 
         .form-grup input {
             width: 100%;
-            padding: 10px 12px;
-            border: 1px solid var(--renk-sinir);
-            border-radius: 5px;
-            font-size: 14px;
-            font-family: Georgia, serif;
-            color: var(--renk-metin);
-            background: #f7faff;
+            padding: 12px 15px;
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
             outline: none;
-            transition: border-color 0.2s;
+            background-color: #fcfdfe;
         }
 
         .form-grup input:focus {
-            border-color: var(--renk-vurgu);
+            border-color: var(--primary);
+            background-color: #fff;
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
         }
 
+        /* Buton */
         .btn-hesapla {
             width: 100%;
-            background: var(--renk-vurgu);
-            color: #fff;
+            padding: 14px;
+            background: var(--primary);
+            color: white;
             border: none;
-            padding: 12px 0;
-            font-size: 14px;
-            font-family: Georgia, serif;
-            border-radius: 5px;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
             cursor: pointer;
-            margin-top: 8px;
-            transition: background 0.2s;
+            transition: all 0.3s ease;
+            margin-top: 10px;
         }
 
         .btn-hesapla:hover {
-            background: var(--renk-vurgu-koyu);
+            background: var(--primary-hover);
+            transform: translateY(-1px);
         }
 
+        /* Sonuç Alanı */
         .sonuc-kutu {
             display: none;
-            margin-top: 24px;
-            padding: 20px 24px;
-            background: var(--renk-acik);
-            border: 1px solid var(--renk-sinir);
-            border-radius: 6px;
+            margin-top: 30px;
+            padding: 25px;
+            background: var(--sonuc-bg);
+            border-radius: 12px;
+            border: 1px solid rgba(22, 101, 52, 0.1);
+            animation: fadeIn 0.5s ease;
         }
 
-        .sonuc-kutu.goster {
-            display: block;
+        .sonuc-kutu.goster { display: block; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .sonuc-ad {
-            font-size: 15px;
-            font-weight: bold;
-            color: #1a2f5e;
-            margin-bottom: 10px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-ana);
+            margin-bottom: 12px;
+            text-transform: capitalize;
         }
 
         .sonuc-satir {
-            font-size: 13.5px;
-            color: var(--renk-metin);
-            margin-bottom: 4px;
+            font-size: 0.95rem;
+            margin-bottom: 6px;
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-ikincil);
         }
 
         .sonuc-satir span {
-            color: var(--renk-vurgu-koyu);
-            font-weight: bold;
+            font-weight: 700;
+            color: var(--text-ana);
         }
 
-        .sonuc-gecti {
-            color: #065f46;
-        }
-
-        .sonuc-kaldi {
-            color: #991b1b;
-        }
+        .sonuc-gecti { color: #16a34a !important; }
+        .sonuc-kaldi { color: #dc2626 !important; }
 
         .hata {
-            color: #c0392b;
-            font-size: 13px;
-            margin-top: 8px;
+            color: var(--hata-renk);
+            font-size: 0.85rem;
+            margin-bottom: 15px;
             display: none;
+            font-weight: 500;
         }
 
         .geri-link {
-            display: inline-block;
-            margin-top: 24px;
-            color: var(--renk-vurgu);
+            display: block;
+            margin-top: 30px;
+            text-align: center;
+            color: var(--text-ikincil);
             text-decoration: none;
-            font-size: 13.5px;
-            border-top: 1px solid var(--renk-sinir);
-            padding-top: 16px;
-            width: 100%;
+            font-size: 0.85rem;
+            transition: color 0.3s;
         }
 
-        .geri-link:hover {
-            color: var(--renk-vurgu-koyu);
-            text-decoration: underline;
-        }
+        .geri-link:hover { color: var(--primary); }
     </style>
 </head>
 <body>
@@ -186,42 +200,43 @@
         <span class="logo">Merve Sueda Aydın</span>
         <ul>
             <li><a href="index.html">Ana Sayfa</a></li>
-            <li><a href="index.html">Hakkımda</a></li>
             <li><a href="index.html">Projeler</a></li>
             <li><a href="index.html">İletişim</a></li>
         </ul>
     </nav>
 
     <div class="sayfa">
-        <h1>Öğrenci Not Hesaplama</h1>
+        <div class="hesapla-kart">
+            <h1>Not Hesaplama</h1>
 
-        <div class="form-grup">
-            <label for="adsoyad">Ad Soyad:</label>
-            <input type="text" id="adsoyad" placeholder="Örn: Merve Sueda Aydın">
+            <div class="form-grup">
+                <label for="adsoyad">Ad Soyad</label>
+                <input type="text" id="adsoyad" placeholder="Örn: Merve Sueda Aydın">
+            </div>
+
+            <div class="form-grup">
+                <label for="vize">Vize Notu (%40)</label>
+                <input type="text" id="vize" placeholder="0 - 100 arası">
+            </div>
+
+            <div class="form-grup">
+                <label for="final">Final Notu (%60)</label>
+                <input type="text" id="final" placeholder="0 - 100 arası">
+            </div>
+
+            <p class="hata" id="hata-mesaj">Lütfen tüm alanları doğru şekilde doldurun.</p>
+
+            <button class="btn-hesapla" onclick="hesapla()">Hesaplamayı Yap</button>
+
+            <div class="sonuc-kutu" id="sonuc-kutu">
+                <div class="sonuc-ad" id="sonuc-ad"></div>
+                <div class="sonuc-satir">Ortalama <span><span id="sonuc-ortalama"></span></span></div>
+                <div class="sonuc-satir">Harf Notu <span><span id="sonuc-harf"></span></span></div>
+                <div class="sonuc-satir" id="sonuc-durum-satir">Durum <span><span id="sonuc-durum"></span></span></div>
+            </div>
+
+            <a class="geri-link" href="index.html">← Portfolyoya Dön</a>
         </div>
-
-        <div class="form-grup">
-            <label for="vize">Vize Notu (0–100):</label>
-            <input type="text" id="vize" placeholder="Örn: 60">
-        </div>
-
-        <div class="form-grup">
-            <label for="final">Final Notu (0–100):</label>
-            <input type="text" id="final" placeholder="Örn: 60">
-        </div>
-
-        <p class="hata" id="hata-mesaj">Lütfen tüm alanları eksiksiz ve doğru doldurun (notlar 0–100 arasında olmalıdır).</p>
-
-        <button class="btn-hesapla" onclick="hesapla()">Hesapla</button>
-
-        <div class="sonuc-kutu" id="sonuc-kutu">
-            <div class="sonuc-ad" id="sonuc-ad"></div>
-            <div class="sonuc-satir">Ortalama: <span id="sonuc-ortalama"></span></div>
-            <div class="sonuc-satir">Harf Notu: <span id="sonuc-harf"></span></div>
-            <div class="sonuc-satir" id="sonuc-durum-satir">Durum: <span id="sonuc-durum"></span></div>
-        </div>
-
-        <a class="geri-link" href="index.html">← Portfolyoya Dön</a>
     </div>
 
     <script>
@@ -264,8 +279,7 @@
             document.getElementById('sonuc-harf').textContent = harf;
 
             const durumEl = document.getElementById('sonuc-durum');
-            const durumSatir = document.getElementById('sonuc-durum-satir');
-            durumEl.textContent = gecti ? 'Geçti' : 'Kaldı';
+            durumEl.textContent = gecti ? 'BAŞARILI' : 'BAŞARISIZ';
             durumEl.className = gecti ? 'sonuc-gecti' : 'sonuc-kaldi';
 
             sonucKutu.classList.add('goster');
