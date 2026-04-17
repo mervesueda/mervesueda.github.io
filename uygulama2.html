@@ -3,177 +3,193 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Uygulama 2 — Birim Dönüştürücü</title>
+    <title>Birim Dönüştürücü — Modern Mühendislik</title>
     <style>
+        /* Özgün Renk Paleti ve Değişkenler */
         :root {
-            --renk-bg:         #f0f6ff;
-            --renk-beyaz:      #ffffff;
-            --renk-sinir:      #c8d8f0;
-            --renk-vurgu:      #4a7fcb;
-            --renk-vurgu-koyu: #2f5fa8;
-            --renk-metin:      #2c3e6b;
-            --renk-acik:       #edf4ff;
+            --ana-bg: #f4f7fa;
+            --kart-bg: #ffffff;
+            --primary: #2563eb; /* Canlı Mavi */
+            --primary-hover: #1d4ed8;
+            --accent: #06b6d4; /* Turkuaz Vurgu */
+            --text-ana: #1e293b; /* Koyu Gri/Lacivert */
+            --text-ikincil: #64748b;
+            --border: #e2e8f0;
+            --sonuc-bg: #f0fdf4; /* Hafif Yeşilimsi */
+            --sonuc-text: #166534;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: Georgia, serif;
-            background: var(--renk-bg);
-            color: var(--renk-metin);
-            min-height: 100vh;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: var(--ana-bg);
+            color: var(--text-ana);
+            line-height: 1.6;
         }
 
+        /* Navigasyon - Daha Minimal */
         nav {
-            background: var(--renk-beyaz);
-            border-bottom: 1px solid var(--renk-sinir);
-            padding: 14px 24px;
+            background: var(--kart-bg);
+            padding: 1rem 2rem;
             display: flex;
-            align-items: center;
             justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
         }
 
-        nav .logo {
-            font-size: 17px;
-            font-weight: bold;
-            color: var(--renk-metin);
+        .logo {
+            font-weight: 800;
+            font-size: 1.2rem;
+            color: var(--primary);
+            letter-spacing: -0.5px;
         }
 
-        nav ul { list-style: none; }
-        nav ul li { display: inline-block; margin-left: 6px; }
+        nav ul { list-style: none; display: flex; gap: 20px; }
         nav ul li a {
             text-decoration: none;
-            color: var(--renk-metin);
-            font-size: 14px;
-            padding: 6px 14px;
-            border-radius: 4px;
+            color: var(--text-ikincil);
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.3s;
         }
-        nav ul li a:hover {
-            background: var(--renk-vurgu);
-            color: #fff;
-        }
+        nav ul li a:hover { color: var(--primary); }
 
+        /* Sayfa Yapısı */
         .sayfa {
-            max-width: 900px;
-            margin: 36px auto;
-            padding: 0 16px;
+            max-width: 1000px;
+            margin: 50px auto;
+            padding: 0 20px;
         }
 
-        .sayfa-baslik {
-            font-size: 13.5px;
-            color: #6b82ab;
-            margin-bottom: 20px;
-            font-style: italic;
+        .uygulama-baslik {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+            text-align: center;
+            color: var(--text-ana);
         }
 
+        .uygulama-baslik span {
+            display: block;
+            font-size: 0.9rem;
+            color: var(--text-ikincil);
+            font-weight: 400;
+            margin-top: 5px;
+        }
+
+        /* Kartlar Grid */
         .kartlar-grid {
-            display: flex;
-            gap: 24px;
-            flex-wrap: wrap;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
         }
 
         .donusturucu-kart {
-            flex: 1;
-            min-width: 280px;
-            background: var(--renk-beyaz);
-            border: 1px solid var(--renk-sinir);
-            border-radius: 8px;
-            padding: 28px;
+            background: var(--kart-bg);
+            border-radius: 16px;
+            padding: 35px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--border);
+            transition: transform 0.3s ease;
+        }
+
+        .donusturucu-kart:hover {
+            transform: translateY(-5px);
         }
 
         .donusturucu-kart h2 {
-            font-size: 20px;
-            color: #1a2f5e;
-            margin-bottom: 20px;
+            font-size: 1.25rem;
+            margin-bottom: 25px;
+            color: var(--text-ana);
+            border-left: 4px solid var(--accent);
+            padding-left: 12px;
         }
 
-        .form-grup {
-            margin-bottom: 16px;
-        }
-
+        /* Form Elemanları */
+        .form-grup { margin-bottom: 20px; }
         .form-grup label {
             display: block;
-            font-size: 13px;
-            color: #6b82ab;
-            margin-bottom: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-ikincil);
         }
 
-        .form-grup input,
-        .form-grup select {
+        .form-grup input, .form-grup select {
             width: 100%;
-            padding: 10px 12px;
-            border: 1px solid var(--renk-sinir);
-            border-radius: 5px;
-            font-size: 14px;
-            font-family: Georgia, serif;
-            color: var(--renk-metin);
-            background: #f7faff;
+            padding: 12px 15px;
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
             outline: none;
-            transition: border-color 0.2s;
+            background-color: #fcfdfe;
         }
 
-        .form-grup input:focus,
-        .form-grup select:focus {
-            border-color: var(--renk-vurgu);
+        .form-grup input:focus, .form-grup select:focus {
+            border-color: var(--primary);
+            background-color: #fff;
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
         }
 
+        /* Buton */
         .btn-hesapla {
             width: 100%;
-            background: var(--renk-vurgu);
-            color: #fff;
+            padding: 14px;
+            background: var(--primary);
+            color: white;
             border: none;
-            padding: 12px 0;
-            font-size: 14px;
-            font-family: Georgia, serif;
-            border-radius: 5px;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
             cursor: pointer;
-            margin-top: 4px;
-            transition: background 0.2s;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.2);
         }
 
         .btn-hesapla:hover {
-            background: var(--renk-vurgu-koyu);
+            background: var(--primary-hover);
+            box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.3);
         }
 
+        /* Sonuç ve Hata */
         .sonuc-kutu {
-            margin-top: 16px;
-            padding: 16px;
-            background: var(--renk-acik);
-            border: 1px solid var(--renk-sinir);
-            border-radius: 5px;
+            margin-top: 20px;
+            padding: 18px;
+            background: var(--sonuc-bg);
+            border: 1px solid rgba(22, 101, 52, 0.1);
+            border-radius: 10px;
             text-align: center;
-            font-size: 15px;
-            font-weight: bold;
-            color: #1a2f5e;
+            font-weight: 700;
+            color: var(--sonuc-text);
             display: none;
+            animation: fadeIn 0.4s ease;
         }
 
-        .sonuc-kutu.goster {
-            display: block;
-        }
+        .sonuc-kutu.goster { display: block; }
 
         .hata {
-            color: #c0392b;
-            font-size: 13px;
-            margin-top: 8px;
+            color: #e11d48;
+            font-size: 0.85rem;
+            margin-top: 10px;
             display: none;
+            font-weight: 500;
         }
 
-        .geri-alan {
-            margin-top: 28px;
-            text-align: center;
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
+        .geri-alan { margin-top: 40px; text-align: center; }
         .geri-link {
-            color: var(--renk-vurgu);
+            color: var(--text-ikincil);
             text-decoration: none;
-            font-size: 13.5px;
+            font-size: 0.9rem;
+            transition: color 0.3s;
         }
-
-        .geri-link:hover {
-            color: var(--renk-vurgu-koyu);
-            text-decoration: underline;
-        }
+        .geri-link:hover { color: var(--primary); }
     </style>
 </head>
 <body>
@@ -181,133 +197,105 @@
     <nav>
         <span class="logo">Merve Sueda Aydın</span>
         <ul>
-            <li><a href="index.html">Ana Sayfa</a></li>
-            <li><a href="index.html">Hakkımda</a></li>
-            <li><a href="index.html">Projeler</a></li>
-            <li><a href="index.html">İletişim</a></li>
+            <li><a href="#">Ana Sayfa</a></li>
+            <li><a href="#">Projeler</a></li>
+            <li><a href="#">İletişim</a></li>
         </ul>
     </nav>
 
     <div class="sayfa">
-        <p class="sayfa-baslik">Uygulama 2 — Birim Dönüştürücü</p>
+        <h1 class="uygulama-baslik">
+            Uygulama 2: Birim Dönüştürücü
+            <span>Mühendislik birimleri arasında hızlı ve hassas dönüşüm yapın.</span>
+        </h1>
 
         <div class="kartlar-grid">
-
-            <!-- Kart 1 -->
             <div class="donusturucu-kart">
-                <h2>Birim Dönüştürücü</h2>
-
+                <h2>Sıcaklık ve Uzunluk</h2>
                 <div class="form-grup">
-                    <label>Değer Giriniz:</label>
-                    <input type="text" id="deger1" placeholder="Örn: 50">
+                    <label>Değer Giriniz</label>
+                    <input type="text" id="deger1" placeholder="Örn: 100">
                 </div>
-
                 <div class="form-grup">
-                    <label>Dönüşüm Tipi:</label>
+                    <label>Dönüşüm Tipi</label>
                     <select id="tip1">
-                        <option value="">Lütfen seçin...</option>
+                        <option value="">Seçim yapın...</option>
                         <optgroup label="Sıcaklık">
                             <option value="c_f">Celsius → Fahrenheit</option>
                             <option value="f_c">Fahrenheit → Celsius</option>
                             <option value="c_k">Celsius → Kelvin</option>
-                            <option value="k_c">Kelvin → Celsius</option>
                         </optgroup>
                         <optgroup label="Uzunluk">
                             <option value="m_km">Metre → Kilometre</option>
                             <option value="km_m">Kilometre → Metre</option>
                             <option value="m_mil">Metre → Mil</option>
-                            <option value="mil_m">Mil → Metre</option>
-                        </optgroup>
-                        <optgroup label="Kütle">
-                            <option value="kg_g">Kilogram → Gram</option>
-                            <option value="g_kg">Gram → Kilogram</option>
                         </optgroup>
                     </select>
                 </div>
-
-                <p class="hata" id="hata1">Lütfen geçerli bir sayı girin ve dönüşüm tipini seçin.</p>
-
+                <p class="hata" id="hata1">Lütfen geçerli bir sayı girin.</p>
                 <button class="btn-hesapla" onclick="donustur(1)">Hesapla</button>
-
                 <div class="sonuc-kutu" id="sonuc1"></div>
             </div>
 
-            <!-- Kart 2 -->
             <div class="donusturucu-kart">
-                <h2>Birim Dönüştürücü</h2>
-
+                <h2>Kütle ve Diğerleri</h2>
                 <div class="form-grup">
-                    <label>Değer Giriniz:</label>
-                    <input type="text" id="deger2" placeholder="Örn: 50">
+                    <label>Değer Giriniz</label>
+                    <input type="text" id="deger2" placeholder="Örn: 25">
                 </div>
-
                 <div class="form-grup">
-                    <label>Dönüşüm Tipi:</label>
+                    <label>Dönüşüm Tipi</label>
                     <select id="tip2">
-                        <option value="">Lütfen seçin...</option>
-                        <optgroup label="Sıcaklık">
-                            <option value="c_f">Celsius → Fahrenheit</option>
-                            <option value="f_c">Fahrenheit → Celsius</option>
-                            <option value="c_k">Celsius → Kelvin</option>
-                            <option value="k_c">Kelvin → Celsius</option>
-                        </optgroup>
-                        <optgroup label="Uzunluk">
-                            <option value="m_km">Metre → Kilometre</option>
-                            <option value="km_m">Kilometre → Metre</option>
-                            <option value="m_mil">Metre → Mil</option>
-                            <option value="mil_m">Mil → Metre</option>
-                        </optgroup>
+                        <option value="">Seçim yapın...</option>
                         <optgroup label="Kütle">
                             <option value="kg_g">Kilogram → Gram</option>
                             <option value="g_kg">Gram → Kilogram</option>
                         </optgroup>
+                        <optgroup label="Hız/Mesafe">
+                            <option value="mil_m">Mil → Metre</option>
+                            <option value="km_m">Kilometre → Metre</option>
+                        </optgroup>
                     </select>
                 </div>
-
-                <p class="hata" id="hata2">Lütfen geçerli bir sayı girin ve dönüşüm tipini seçin.</p>
-
+                <p class="hata" id="hata2">Lütfen geçerli bir sayı girin.</p>
                 <button class="btn-hesapla" onclick="donustur(2)">Hesapla</button>
-
                 <div class="sonuc-kutu" id="sonuc2"></div>
             </div>
-
         </div>
 
         <div class="geri-alan">
-            <a class="geri-link" href="index.html">← Portfolyoya Dön</a>
+            <a class="geri-link" href="#">← Portfolyoya Dön</a>
         </div>
     </div>
 
     <script>
+        // Fonksiyonlar aynı mantıkla çalışmaya devam eder
         function hesapla(deger, tip) {
             switch(tip) {
-                case 'c_f':  return (deger * 9/5) + 32;
-                case 'f_c':  return (deger - 32) * 5/9;
-                case 'c_k':  return deger + 273.15;
-                case 'k_c':  return deger - 273.15;
-                case 'm_km': return deger / 1000;
-                case 'km_m': return deger * 1000;
+                case 'c_f':   return (deger * 9/5) + 32;
+                case 'f_c':   return (deger - 32) * 5/9;
+                case 'c_k':   return deger + 273.15;
+                case 'k_c':   return deger - 273.15;
+                case 'm_km':  return deger / 1000;
+                case 'km_m':  return deger * 1000;
                 case 'm_mil': return deger / 1609.344;
                 case 'mil_m': return deger * 1609.344;
-                case 'kg_g': return deger * 1000;
-                case 'g_kg': return deger / 1000;
+                case 'kg_g':  return deger * 1000;
+                case 'g_kg':  return deger / 1000;
                 default: return null;
             }
         }
 
         function birimAdi(tip) {
             const map = {
-                'c_f': ['°C','°F'], 'f_c': ['°F','°C'],
-                'c_k': ['°C','K'],  'k_c': ['K','°C'],
-                'm_km': ['m','km'], 'km_m': ['km','m'],
-                'm_mil': ['m','mi'], 'mil_m': ['mi','m'],
-                'kg_g': ['kg','g'], 'g_kg': ['g','kg']
+                'c_f': ['°C','°F'], 'f_c': ['°F','°C'], 'c_k': ['°C','K'],
+                'm_km': ['m','km'], 'km_m': ['km','m'], 'm_mil': ['m','mi'],
+                'kg_g': ['kg','g'], 'g_kg': ['g','kg'], 'mil_m': ['mi','m']
             };
             return map[tip] || ['',''];
         }
 
         function formatSayi(s) {
-            // Ondalıklı ise max 3 basamak, tam ise tam göster
             if (Number.isInteger(s)) return s.toLocaleString('tr-TR');
             return parseFloat(s.toFixed(3)).toLocaleString('tr-TR');
         }
@@ -327,7 +315,6 @@
             }
 
             hata.style.display = 'none';
-
             const sonuc = hesapla(deger, tip);
             const [birim1, birim2] = birimAdi(tip);
 
@@ -335,6 +322,5 @@
             sonucKutu.classList.add('goster');
         }
     </script>
-
 </body>
 </html>
