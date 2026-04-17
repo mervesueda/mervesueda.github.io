@@ -6,283 +6,289 @@
     <title>Merve Sueda Aydın - Portfolyo</title>
 
     <style>
+        /* Modern Tasarım Sistemi - Diğer Uygulamalarla Eşitlendi */
         :root {
-            --renk-arka-plan:   #f0f6ff;
-            --renk-beyaz:       #ffffff;
-            --renk-sinir:       #c8d8f0;
-            --renk-ana-metin:   #2c3e6b;
-            --renk-ikincil:     #334d7a;
-            --renk-vurgu:       #4a7fcb;
-            --renk-vurgu-koyu:  #2f5fa8;
-            --renk-footer:      #6b82ab;
-            --renk-sol-kutu:    #fef9ec;
-            --renk-sol-sinir:   #e8d9a0;
-            --renk-sag-kutu:    #edf4ff;
+            --ana-bg: #f4f7fa;
+            --kart-bg: #ffffff;
+            --primary: #2563eb; 
+            --primary-hover: #1d4ed8;
+            --accent: #06b6d4; 
+            --text-ana: #1e293b; 
+            --text-ikincil: #64748b;
+            --border: #e2e8f0;
+            --sol-kutu-bg: #fffbf2; /* Hafif sıcak ton korundu */
+            --sag-kutu-bg: #f8fafc;
+            --danger: #e11d48;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: Georgia, serif;
-            background: var(--renk-arka-plan);
-            color: var(--renk-ana-metin);
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: var(--ana-bg);
+            color: var(--text-ana);
+            line-height: 1.6;
         }
 
+        /* Navigasyon */
         nav {
-            background: var(--renk-beyaz);
-            border-bottom: 1px solid var(--renk-sinir);
-            padding: 14px 24px;
+            background: var(--kart-bg);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 2rem;
             display: flex;
             align-items: center;
             justify-content: space-between;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
         nav .logo {
-            font-size: 17px;
-            font-weight: bold;
-            color: var(--renk-ana-metin);
-            letter-spacing: 0.5px;
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: var(--primary);
+            letter-spacing: -0.5px;
         }
 
-        nav ul { list-style: none; }
-        nav ul li { display: inline-block; margin-left: 6px; }
+        nav ul { list-style: none; display: flex; gap: 8px; }
         nav ul li a {
             text-decoration: none;
-            color: var(--renk-ana-metin);
-            font-size: 14px;
-            padding: 6px 14px;
-            border-radius: 4px;
+            color: var(--text-ikincil);
+            font-size: 0.9rem;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
         }
+        
         nav ul li a:hover,
         nav ul li a.aktif {
-            background: var(--renk-vurgu);
+            background: var(--primary);
             color: #fff;
         }
 
+        /* Sayfa Konteyner */
         .sayfa {
-            max-width: 820px;
-            margin: 28px auto;
-            background: var(--renk-beyaz);
-            border: 1px solid var(--renk-sinir);
-            border-radius: 8px;
-            padding: 28px;
+            max-width: 900px;
+            margin: 40px auto;
+            background: var(--kart-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
         }
 
         .aciklama {
-            font-size: 14px;
-            color: var(--renk-ana-metin);
-            line-height: 1.75;
-            margin-bottom: 22px;
-            border-bottom: 1px solid #e0eaf8;
-            padding-bottom: 18px;
+            font-size: 1.1rem;
+            color: var(--text-ana);
+            margin-bottom: 30px;
+            padding-bottom: 25px;
+            border-bottom: 2px solid var(--ana-bg);
+            font-weight: 500;
         }
 
-        .aciklama span { color: var(--renk-vurgu); }
+        .aciklama span { color: var(--primary); font-weight: 700; }
 
-        .sutunlar { display: flex; gap: 20px; }
+        /* Sütun Yapısı */
+        .sutunlar { display: flex; gap: 25px; }
 
         .icerik {
-            flex: 1.1;
-            background: var(--renk-sol-kutu);
-            border: 1px solid var(--renk-sol-sinir);
-            border-radius: 6px;
-            padding: 18px;
+            flex: 1.2;
+            background: var(--sol-kutu-bg);
+            border: 1px solid #f2e3c0;
+            border-radius: 12px;
+            padding: 25px;
         }
 
         aside {
             flex: 1;
-            background: var(--renk-sag-kutu);
-            border: 1px solid var(--renk-sinir);
-            border-radius: 6px;
-            padding: 18px;
+            background: var(--sag-kutu-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 25px;
         }
 
-        h1, h2, p { line-height: 1.7; }
-
-        .icerik h2,
-        aside h2 { font-size: 16px; color: #1a2f5e; margin-bottom: 12px; }
-
-        .icerik p {
-            font-size: 13.5px;
-            color: var(--renk-ana-metin);
-            text-align: justify;
-            line-height: 1.85;
-            margin-bottom: 12px;
-        }
-
-        aside p {
-            font-size: 13px;
-            color: var(--renk-ikincil);
-            line-height: 1.8;
-            margin-bottom: 10px;
-        }
-
-        .sosyal-linkler { list-style: none; margin-top: 6px; }
-        .sosyal-linkler li { margin-bottom: 8px; }
-        .sosyal-linkler a {
-            text-decoration: none;
-            font-size: 13px;
-            color: var(--renk-vurgu);
+        h2 { 
+            font-size: 1.1rem; 
+            color: var(--text-ana); 
+            margin-bottom: 15px;
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
         }
-        .sosyal-linkler a:hover { color: var(--renk-vurgu-koyu); text-decoration: underline; }
 
+        .icerik p, aside p {
+            font-size: 0.95rem;
+            color: var(--text-ikincil);
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        /* Sosyal Linkler */
+        .sosyal-linkler { list-style: none; }
+        .sosyal-linkler li { margin-bottom: 10px; }
+        .sosyal-linkler a {
+            text-decoration: none;
+            font-size: 0.9rem;
+            color: var(--primary);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: color 0.3s;
+        }
+        .sosyal-linkler a:hover { color: var(--accent); }
+
+        /* Proje Link Alanı */
         .lab-link-kutu {
-            margin-top: 22px;
-            border-top: 1px solid var(--renk-sinir);
-            padding-top: 16px;
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(0,0,0,0.05);
             display: flex;
             flex-direction: column;
-            gap: 10px;
-            align-items: flex-start;
+            gap: 12px;
         }
 
         .lab-link-kutu a {
-            display: inline-block;
-            background: var(--renk-vurgu);
-            color: #fff;
+            display: block;
+            background: var(--kart-bg);
+            color: var(--text-ana);
             text-decoration: none;
-            padding: 9px 20px;
-            border-radius: 5px;
-            font-size: 13.5px;
+            padding: 12px 18px;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
         }
-        .lab-link-kutu a:hover { background: var(--renk-vurgu-koyu); }
-
-        /* Lab 6 grup — yan yana iki buton */
-        .lab6-grup {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-
-        .lab6-grup a {
-            flex: 1;
-            min-width: 180px;
-            text-align: center;
+        
+        .lab-link-kutu a:hover { 
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: translateX(5px);
         }
 
         .lab6-etiket {
-            font-size: 12px;
-            color: #6b82ab;
-            margin-top: 2px;
-            margin-bottom: 2px;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-ikincil);
+            margin-top: 10px;
+            font-weight: 700;
+        }
+
+        .lab6-grup { display: flex; gap: 10px; }
+        .lab6-grup a { 
+            flex: 1; 
+            text-align: center; 
+            background: var(--primary); 
+            color: white; 
+            border: none;
+        }
+        .lab6-grup a:hover { 
+            background: var(--primary-hover); 
+            color: white; 
+            transform: translateY(-2px);
         }
 
         footer {
             text-align: center;
-            font-size: 12.5px;
-            color: var(--renk-footer);
-            padding: 18px 0 0 0;
-            border-top: 1px solid #d0e0f8;
-            margin-top: 28px;
+            font-size: 0.85rem;
+            color: var(--text-ikincil);
+            padding-top: 30px;
+            border-top: 1px solid var(--border);
+            margin-top: 35px;
         }
 
-        .iletisim-panel { display: none; }
+        /* İletişim Paneli Modernizasyon */
+        .iletisim-panel { display: none; animation: fadeIn 0.5s ease; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
         .iletisim-panel h1 {
             text-align: center;
-            font-size: 22px;
-            color: #1a2f5e;
-            margin-bottom: 26px;
+            font-size: 1.8rem;
+            color: var(--text-ana);
+            margin-bottom: 30px;
         }
 
-        .contact-container {
-            width: 100%;
-            max-width: 660px;
-            margin: auto;
-            background: var(--renk-beyaz);
-            padding: 30px 36px;
-            border: 1px solid var(--renk-sinir);
-            border-radius: 8px;
-        }
+        .contact-container { width: 100%; max-width: 600px; margin: auto; }
 
-        .contact-container > label {
+        label {
             display: block;
-            font-size: 13.5px;
-            font-weight: bold;
-            color: #1a2f5e;
-            margin-bottom: 6px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--text-ana);
+            margin-bottom: 8px;
         }
 
-        input[type="text"],
-        input[type="email"],
-        input[type="password"],
-        select,
-        textarea {
+        input[type="text"], input[type="email"], input[type="password"], select, textarea {
             width: 100%;
-            padding: 10px 12px;
-            margin-bottom: 18px;
-            border: 1px solid var(--renk-sinir);
-            border-radius: 5px;
-            font-size: 13px;
-            font-family: Georgia, serif;
-            color: var(--renk-ana-metin);
-            background: #f7faff;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            font-size: 0.95rem;
+            background: #fcfdfe;
             outline: none;
+            transition: all 0.3s;
         }
 
-        input[type="text"]:focus,
-        input[type="email"]:focus,
-        input[type="password"]:focus,
-        select:focus,
-        textarea:focus { border-color: var(--renk-vurgu); }
-
-        textarea { resize: vertical; min-height: 110px; }
+        input:focus, select:focus, textarea:focus { 
+            border-color: var(--primary); 
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+        }
 
         .grup-kutu {
-            border: 1px solid var(--renk-sinir);
-            border-radius: 5px;
-            background: var(--renk-arka-plan);
-            padding: 12px 16px;
-            margin-bottom: 18px;
+            background: var(--ana-bg);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid var(--border);
         }
 
         .grup-kutu label {
-            font-weight: normal;
-            font-size: 13px;
-            margin-bottom: 8px;
+            font-weight: 500;
             display: flex;
             align-items: center;
-            gap: 8px;
-            color: var(--renk-ana-metin);
-        }
-
-        input[type="file"] {
-            width: auto;
-            padding: 4px 0;
-            border: none;
-            background: transparent;
-            margin-bottom: 18px;
-            font-size: 13px;
-        }
-
-        .btn-row { display: flex; gap: 14px; margin-top: 6px; }
-
-        .btn-gonder {
-            flex: 1;
-            background: var(--renk-vurgu);
-            color: #fff;
-            border: none;
-            padding: 12px 0;
-            font-size: 14px;
-            border-radius: 5px;
+            gap: 10px;
             cursor: pointer;
+            margin-bottom: 8px;
         }
-        .btn-gonder:hover { background: var(--renk-vurgu-koyu); }
 
+        .btn-row { display: flex; gap: 15px; margin-top: 10px; }
+        .btn-gonder {
+            flex: 2;
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 14px;
+            font-weight: 700;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
         .btn-temizle {
             flex: 1;
-            background: #d63c4e;
-            color: #fff;
-            border: none;
-            padding: 12px 0;
-            font-size: 14px;
-            border-radius: 5px;
+            background: #f1f5f9;
+            color: var(--danger);
+            border: 1px solid var(--border);
+            padding: 14px;
+            font-weight: 700;
+            border-radius: 10px;
             cursor: pointer;
         }
-        .btn-temizle:hover { background: #b52d3d; }
+        .btn-gonder:hover { background: var(--primary-hover); }
+        .btn-temizle:hover { background: #fee2e2; }
+
+        @media (max-width: 768px) {
+            .sutunlar { flex-direction: column; }
+            .sayfa { margin: 10px; padding: 20px; }
+        }
     </style>
 </head>
 <body>
@@ -290,137 +296,125 @@
     <nav>
         <span class="logo">Merve Sueda Aydın</span>
         <ul>
-            <li><a href="#" class="aktif" onclick="goster('ana'); return false;">Ana Sayfa</a></li>
+            <li><a href="#" class="aktif" id="nav-ana" onclick="goster('ana'); return false;">Ana Sayfa</a></li>
             <li><a href="#" onclick="goster('ana'); return false;">Hakkımda</a></li>
             <li><a href="#" onclick="goster('ana'); return false;">Projeler</a></li>
-            <li><a href="#" onclick="goster('iletisim'); return false;">İletişim</a></li>
+            <li><a href="#" id="nav-iletisim" onclick="goster('iletisim'); return false;">İletişim</a></li>
         </ul>
     </nav>
 
     <div class="sayfa" id="ana-panel">
-
         <p class="aciklama">
-            Merhaba, ben Merve. Bilgisayar Mühendisliği 3. sınıf öğrencisiyim. Yapay zeka ve veri analizi alanlarına ilgi duyuyorum.
-            Web programlamayı bu dönem öğrenmeye başladım.
-            Bu da benim ilk web sitem.
+            Merhaba, ben <span>Merve</span>. Bilgisayar Mühendisliği 3. sınıf öğrencisiyim. 
+            Yapay zeka ve veri analizi alanlarına ilgi duyuyorum. Web dünyasına bu portfolyo ile ilk adımı attım.
         </p>
 
         <div class="sutunlar">
-
             <section class="icerik">
-                <h2>İçerik</h2>
+                <h2>🚀 İçerik ve Gelişim</h2>
                 <p>
-                    Bu alanda örnek içerik metinleri bulunmaktadır. CSS özellikleriyle bu metinler
-                    arasında <strong>boşluklar</strong> (line-height) ve hizalamalar (text-align) düzenlenebilir.
+                    Bu web sitesi, HTML ve CSS temellerini öğrenirken geliştirdiğim dinamik bir yapıdır. 
+                    Grup seçiciler ve modern layout sistemlerini kullanarak görsel hiyerarşiyi kurguladım.
                 </p>
                 <p>
-                    Önce CSS ile kutuları / alanları yan yana getirmeyi, ardından alt alta yerleştirmeyi öğrendik.
-                    Şimdi ise CSS seçicilerini kullanarak grup ve hiyerarşik seçimler yapmayı görüyoruz.
+                    Şu an <strong>JavaScript</strong> ile kullanıcı etkileşimli uygulamalar geliştiriyor, 
+                    mantıksal algoritmaları arayüzlere döküyorum.
                 </p>
 
                 <div class="lab-link-kutu">
                     <a href="flexbox.html" target="_blank">🔗 Lab 4 — Flexbox Uygulaması</a>
                     <a href="lab-position.html">📌 Lab 5 — CSS Position Duyuru Kartı</a>
 
-                    <!-- Lab 6 — JavaScript Uygulamaları -->
-                    <p class="lab6-etiket">🧪 Lab 6 — JavaScript Uygulamaları</p>
+                    <p class="lab6-etiket">🧪 JavaScript Laboratuvarı</p>
                     <div class="lab6-grup">
-                        <a href="uygulama1.html">📊 Uygulama 1 — Not Hesaplama</a>
-                        <a href="uygulama2.html">🔄 Uygulama 2 — Birim Dönüştürücü</a>
+                        <a href="uygulama1.html">📊 Not Hesaplama</a>
+                        <a href="uygulama2.html">🔄 Birim Dönüştürücü</a>
                     </div>
                 </div>
             </section>
 
             <aside>
-                <h2>Yan Menü / Bilgi</h2>
+                <h2>ℹ️ Bilgi Paneli</h2>
                 <p>
-                    Bu alan yan menü veya bilgi kısmıdır. CSS ile genişlik (width), yükseklik (height),
-                    kenar boşlukları (margin/padding) ve kenarlık (border) özelliklerini kullanarak düzenleyebiliriz.
-                </p>
-                <p>
-                    Öğrendiklerimizi hiyerarşik ve grup seçicilerle uygulayıp farklı bölümlere stil verebiliriz.
+                    CSS Box Model yapısını kullanarak alanları (padding/margin) optimize ettim. 
+                    Grid ve Flexbox yapıları ile duyarlı (responsive) bir tasarım hedefledim.
                 </p>
 
                 <ul class="sosyal-linkler">
                     <li><a href="https://github.com/mervesueda" target="_blank">⬡ GitHub</a></li>
                     <li><a href="https://linkedin.com/in/mervesuedaaydin" target="_blank">in LinkedIn</a></li>
                     <li><a href="https://kaggle.com/mervesuedaaydn" target="_blank">◈ Kaggle</a></li>
-                    <li><a href="mailto:mervesueda2005@gmail.com">✉ E-posta</a></li>
+                    <li><a href="mailto:mervesueda2005@gmail.com">✉ E-posta Gönder</a></li>
                 </ul>
             </aside>
-
         </div>
 
         <footer>
-            &copy; Merve Sueda Aydın Portfolyo. Bu sayfa basit bir HTML+CSS alıştırmasıdır.
+            &copy; 2026 Merve Sueda Aydın | Mühendislik Portfolyosu
         </footer>
-
     </div>
 
-    <!-- İletişim Paneli -->
     <div class="sayfa iletisim-panel" id="iletisim-panel">
-
-        <h1>Detaylı İletişim Formu</h1>
-
+        <h1>Bana Ulaşın</h1>
         <div class="contact-container">
+            <label for="ad">Ad Soyad</label>
+            <input type="text" id="ad" placeholder="Adınız ve Soyadınız">
 
-            <label for="ad">Ad Soyad:</label>
-            <input type="text" id="ad" placeholder="Örn: Asaf Karataş">
-
-            <label for="eposta">E-posta Adresi:</label>
+            <label for="eposta">E-posta Adresi</label>
             <input type="email" id="eposta" placeholder="ornek@mail.com">
 
-            <label for="sifre">Başvuru Takip Şifresi:</label>
-            <input type="password" id="sifre" placeholder="Şifrenizi girin">
+            <label for="sifre">Başvuru Takip Şifresi</label>
+            <input type="password" id="sifre" placeholder="Şifre belirleyin">
 
-            <label>İletişim Tercihi:</label>
+            <label>İletişim Tercihi</label>
             <div class="grup-kutu">
-                <label><input type="radio" name="tercih" checked> Bana e-posta ile ulaşın</label>
-                <label><input type="radio" name="tercih"> Bana telefonla ulaşın</label>
+                <label><input type="radio" name="tercih" checked> E-posta</label>
+                <label><input type="radio" name="tercih"> Telefon</label>
             </div>
 
-            <label>İlgi Alanları / Yetenekler:</label>
+            <label>İlgi Alanları</label>
             <div class="grup-kutu">
-                <label><input type="checkbox"> HTML</label>
-                <label><input type="checkbox"> CSS</label>
-                <label><input type="checkbox"> Algoritma</label>
+                <label><input type="checkbox"> HTML/CSS</label>
+                <label><input type="checkbox"> Veri Bilimi</label>
+                <label><input type="checkbox"> Yapay Zeka</label>
             </div>
 
-            <label for="konu">Konu:</label>
+            <label for="konu">Konu</label>
             <select id="konu">
-                <option value="">Lütfen bir konu seçin...</option>
+                <option value="">Seçiniz...</option>
                 <option>İş Teklifi</option>
-                <option>Soru</option>
-                <option>Geri Bildirim</option>
+                <option>Akademik Soru</option>
+                <option>Genel Mesaj</option>
             </select>
 
-            <label for="dosya">Özgeçmiş (CV) veya Fotoğraf Yükle:</label>
+            <label for="dosya">CV Yükle</label>
             <input type="file" id="dosya">
 
-            <label for="mesaj">Mesajınız:</label>
-            <textarea id="mesaj" placeholder="Detaylı mesajınızı buraya yazabilirsiniz..."></textarea>
+            <label for="mesaj">Mesajınız</label>
+            <textarea id="mesaj" placeholder="Mesajınızı buraya yazın..."></textarea>
 
             <div class="btn-row">
-                <button class="btn-gonder">Gönder</button>
-                <button class="btn-temizle" onclick="document.querySelectorAll('input,select,textarea').forEach(function(e){e.value='';e.checked=false;}); return false;">Temizle</button>
+                <button class="btn-gonder">Mesajı Gönder</button>
+                <button class="btn-temizle" onclick="temizle(); return false;">Temizle</button>
             </div>
-
         </div>
     </div>
 
     <script>
         function goster(panel) {
-            document.getElementById('ana-panel').style.display      = panel === 'ana'       ? 'block' : 'none';
-            document.getElementById('iletisim-panel').style.display = panel === 'iletisim'  ? 'block' : 'none';
-            document.querySelectorAll('nav ul li a').forEach(function(a) {
-                a.classList.remove('aktif');
-                if ((panel === 'ana'      && a.textContent.trim() === 'Ana Sayfa') ||
-                    (panel === 'iletisim' && a.textContent.trim() === 'İletişim')) {
-                    a.classList.add('aktif');
-                }
+            document.getElementById('ana-panel').style.display = panel === 'ana' ? 'block' : 'none';
+            document.getElementById('iletisim-panel').style.display = panel === 'iletisim' ? 'block' : 'none';
+            
+            document.getElementById('nav-ana').classList.toggle('aktif', panel === 'ana');
+            document.getElementById('nav-iletisim').classList.toggle('aktif', panel === 'iletisim');
+        }
+
+        function temizle() {
+            document.querySelectorAll('input, select, textarea').forEach(el => {
+                if(el.type === 'radio' || el.type === 'checkbox') el.checked = false;
+                else el.value = '';
             });
         }
     </script>
-
 </body>
 </html>
