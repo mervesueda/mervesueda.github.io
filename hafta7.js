@@ -12,12 +12,14 @@ document.addEventListener('DOMContentLoaded', () => {
             const isDark = document.body.getAttribute("data-bs-theme") === "dark";
             if (isDark) {
                 document.body.setAttribute("data-bs-theme", "light");
-                document.body.classList.remove("koyu-tema");
+                document.body.classList.remove("koyu-tema"); // CSS'indeki koyu-tema sınıfını kaldırır
                 temaButonu.textContent = "🌙 Koyu Temaya Geç";
+                temaButonu.className = "btn btn-outline-secondary btn-lg px-4";
             } else {
                 document.body.setAttribute("data-bs-theme", "dark");
-                document.body.classList.add("koyu-tema");
+                document.body.classList.add("koyu-tema"); // CSS'indeki koyu-tema sınıfını ekler
                 temaButonu.textContent = "☀️ Açık Temaya Geç";
+                temaButonu.className = "btn btn-outline-light btn-lg px-4";
             }
         });
     }
@@ -25,9 +27,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // ---- FORM GÖNDERME (ÖZETLEME) ----
     if (form) {
         form.addEventListener("submit", function (e) {
-            e.preventDefault();
+            e.preventDefault(); // Sayfa yenilenmesini engeller
 
-            // HTML ID'leri ile birebir eşleşme
+            // Değerleri alıyoruz
             const ad = document.getElementById("adsoyad").value.trim();
             const mail = document.getElementById("eposta").value.trim();
             const bolum = document.getElementById("bolum").value.trim();
@@ -44,24 +46,24 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
-            // Başarılı durum
+            // Başarılı durumda işlemleri yap
             uyariAlani.classList.add("d-none");
             sonucAlani.classList.remove("d-none");
-            sonucAlani.className = "alert alert-success ozet-kart"; // CSS'indeki ozet-kart sınıfını kullanır
+            sonucAlani.className = "alert alert-success ozet-kart p-4 shadow-sm"; 
 
             const suAn = new Date().toLocaleDateString('tr-TR');
 
             sonucAlani.innerHTML = `
-                <div class="d-flex justify-content-between mb-2">
-                    <h5 class="fw-bold">✅ Başvuru Özeti</h5>
-                    <small>${suAn}</small>
+                <div class="d-flex justify-content-between align-items-center mb-3 border-bottom pb-2">
+                    <h5 class="fw-bold mb-0 text-success">✅ Başvuru Özeti</h5>
+                    <small class="text-muted">${suAn}</small>
                 </div>
-                <div class="ozet-satir"><span class="etiket">Ad Soyad:</span> <span class="deger">${ad}</span></div>
-                <div class="ozet-satir"><span class="etiket">E-posta:</span> <span class="deger">${mail}</span></div>
-                <div class="ozet-satir"><span class="etiket">Bölüm/Sınıf:</span> <span class="deger">${bolum} / ${sinif}</span></div>
-                <div class="ozet-satir"><span class="etiket">Oturum:</span> <span class="deger">${oturum || '-'}</span></div>
-                <div class="ozet-satir"><span class="etiket">Katılım:</span> <span class="deger">${katilim || '-'}</span></div>
-                ${mesaj ? `<div class="mt-2 small border-top pt-2"><strong>Mesaj:</strong> ${mesaj}</div>` : ''}
+                <div class="ozet-satir d-flex justify-content-between mb-2"><strong>Ad Soyad:</strong> <span>${ad}</span></div>
+                <div class="ozet-satir d-flex justify-content-between mb-2"><strong>E-posta:</strong> <span>${mail}</span></div>
+                <div class="ozet-satir d-flex justify-content-between mb-2"><strong>Bölüm / Sınıf:</strong> <span>${bolum} / ${sinif}</span></div>
+                <div class="ozet-satir d-flex justify-content-between mb-2"><strong>Oturum:</strong> <span>${oturum || '-'}</span></div>
+                <div class="ozet-satir d-flex justify-content-between mb-2"><strong>Katılım:</strong> <span>${katilim || '-'}</span></div>
+                ${mesaj ? `<div class="mt-3 p-2 bg-light rounded small text-dark"><strong>Mesaj:</strong> ${mesaj}</div>` : ''}
             `;
             
             sonucAlani.scrollIntoView({ behavior: 'smooth' });
@@ -73,8 +75,8 @@ document.addEventListener('DOMContentLoaded', () => {
         formTemizle.addEventListener("click", () => {
             form.reset();
             uyariAlani.classList.add("d-none");
-            sonucAlani.className = "alert alert-info";
-            sonucAlani.innerHTML = "Henüz başvuru özeti oluşturulmadı.";
+            sonucAlani.className = "alert alert-info rounded-4";
+            sonucAlani.innerHTML = "Henüz başvuru özeti oluşturulmadı. Formu doldurduktan sonra sonuç burada görünecek.";
         });
     }
 });
