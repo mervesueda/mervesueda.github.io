@@ -5,9 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lab 4 — Flexbox Uygulaması</title>
     <style>
-        /* ====================================================
-           RENK PALETİ — Tek yerden değiştir
-        ==================================================== */
         :root {
             --renk-bg:         #f0f6ff;
             --renk-beyaz:      #ffffff;
@@ -16,74 +13,56 @@
             --renk-vurgu-koyu: #2f5fa8;
             --renk-metin:      #2c3e6b;
             --renk-acik:       #edf4ff;
+            --nav-bg:          #0f172a;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        /* ====================================================
-           ANA KAPSAYICI — 100vh zorunlu şart
-           flex-direction: column → dikey yerleşim
-        ==================================================== */
         .wrapper {
             display: flex;
-            flex-direction: column;   /* ← column kullanıldı */
-            height: 100vh;            /* ← 100vh zorunlu şart */
+            flex-direction: column;
+            height: 100vh;
             font-family: Georgia, serif;
             background: var(--renk-bg);
             color: var(--renk-metin);
             overflow: hidden;
         }
 
-        /* ====================================================
-           1) NAVBAR — 10vh
-           justify-content: space-between  (solda logo, sağda linkler)
-           align-items: center
-        ==================================================== */
         .navbar {
             height: 10vh;
-            background: var(--renk-beyaz);
-            border-bottom: 1px solid var(--renk-sinir);
+            background: var(--nav-bg);
+            border-bottom: 1px solid #1e293b;
             padding: 0 28px;
             display: flex;
-            justify-content: space-between;   /* ← space-between */
-            align-items: center;              /* ← center */
+            justify-content: space-between;
+            align-items: center;
         }
 
         .navbar .logo {
             font-size: 16px;
             font-weight: bold;
-            color: var(--renk-metin);
+            color: #fff;
         }
 
-        /* Lab 2 kuralı: ul > li > a, display: inline-block, hover efekti */
         .navbar ul { list-style: none; }
-
         .navbar ul li { display: inline-block; margin-left: 8px; }
 
-        /* Hiyerarşik seçici 1 */
         .navbar ul li a {
             text-decoration: none;
             font-size: 13.5px;
-            color: var(--renk-metin);
+            color: #e2e8f0;
             padding: 5px 12px;
             border-radius: 4px;
         }
 
-        /* Hover efekti */
-        .navbar ul li a:hover { background: var(--renk-vurgu); color: #fff; }
+        .navbar ul li a:hover { background: rgba(255,255,255,0.1); color: #fff; }
 
-        /* ====================================================
-           2) HERO — 30vh
-           flex-direction: row
-           justify-content: space-between
-           align-items: stretch
-        ==================================================== */
         .hero {
             height: 30vh;
             display: flex;
-            flex-direction: row;            /* ← row */
-            justify-content: space-between; /* ← space-between */
-            align-items: stretch;           /* ← stretch */
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: stretch;
             padding: 16px 28px;
             gap: 20px;
             background: var(--renk-acik);
@@ -97,12 +76,9 @@
             gap: 12px;
         }
 
-        /* Grup seçici */
         h1, h2, p { line-height: 1.6; }
 
         .hero-metin h1 { font-size: 20px; color: #1a2f5e; }
-
-        /* Hiyerarşik seçici 2 */
         .hero-metin p { font-size: 13px; color: var(--renk-metin); }
 
         .hero-buton {
@@ -127,17 +103,12 @@
             justify-content: center;
             font-size: 13px;
             color: var(--renk-vurgu);
-            /* stretch sayesinde hero yüksekliğine tam uyar */
         }
 
-        /* ====================================================
-           3) KARTLAR BÖLÜMİ — 30vh
-           display: flex, flex-wrap: wrap, gap
-        ==================================================== */
         .kartlar {
             height: 30vh;
             display: flex;
-            flex-wrap: wrap;    /* ← flex-wrap */
+            flex-wrap: wrap;
             gap: 10px;
             padding: 12px 28px;
             align-content: flex-start;
@@ -159,20 +130,13 @@
         }
 
         .kart h3 { font-size: 13px; color: #1a2f5e; margin-bottom: 4px; }
-
-        /* Hiyerarşik seçici 3 */
         .kart p { font-size: 11.5px; color: var(--renk-metin); }
 
-        /* ====================================================
-           4) FLEX-GROW BÖLÜMÜ — 20vh
-           3 kutu: flex-grow 1 / 2 / 1
-           align-items: stretch
-        ==================================================== */
         .grow-bolum {
             height: 20vh;
             display: flex;
             flex-direction: row;
-            align-items: stretch;   /* ← stretch */
+            align-items: stretch;
             padding: 10px 28px;
             gap: 10px;
             background: var(--renk-acik);
@@ -190,28 +154,23 @@
             border: 1px solid var(--renk-sinir);
         }
 
-        .grow-kutu-1 { flex-grow: 1; background: #d4e6ff; }   /* flex-grow: 1 */
-        .grow-kutu-2 { flex-grow: 2; background: #a8ccf0; }   /* flex-grow: 2 */
-        .grow-kutu-3 { flex-grow: 1; background: #d4e6ff; }   /* flex-grow: 1 */
+        .grow-kutu-1 { flex-grow: 1; background: #d4e6ff; }
+        .grow-kutu-2 { flex-grow: 2; background: #a8ccf0; }
+        .grow-kutu-3 { flex-grow: 1; background: #d4e6ff; }
 
-        /* ====================================================
-           5) FOOTER — 10vh
-           justify-content: center
-           align-items: center
-        ==================================================== */
         .footer {
             height: 10vh;
             display: flex;
-            justify-content: center;   /* ← center */
-            align-items: center;       /* ← center */
-            background: var(--renk-beyaz);
-            border-top: 1px solid var(--renk-sinir);
+            justify-content: center;
+            align-items: center;
+            background: var(--nav-bg);
+            border-top: 1px solid #1e293b;
             font-size: 12.5px;
-            color: #6b82ab;
+            color: #94a3b8;
         }
 
         .footer a {
-            color: var(--renk-vurgu);
+            color: #60a5fa;
             text-decoration: none;
             margin-left: 8px;
         }
@@ -221,15 +180,10 @@
 </head>
 <body>
 
-    <!-- Ana kapsayıcı: 100vh, flex-direction: column -->
     <div class="wrapper">
-
-        <!-- 1) NAVBAR — 10vh -->
         <nav class="navbar">
-            
             <span class="logo">Merve Sueda Aydın</span>
             <ul>
-                <!-- 4 link — Lab 2 kuralı -->
                 <li><a href="index.html">Ana Sayfa</a></li>
                 <li><a href="index.html">Hakkımda</a></li>
                 <li><a href="index.html">Projeler</a></li>
@@ -237,42 +191,34 @@
             </ul>
         </nav>
 
-        <!-- 2) HERO — 30vh, flex-direction: row, align-items: stretch -->
         <section class="hero">
             <div class="hero-metin">
                 <h1>Web Programlama Lab 4</h1>
-                <p>
-                    Bu benim 4. lab ödevim olan flexbox çalışmasıdır.<br>
-                    
-                </p>
+                <p>Bu benim 4. lab ödevim olan flexbox çalışmasıdır.</p>
                 <a class="hero-buton" href="index.html">← Portfolyoya Dön</a>
             </div>
             <div class="hero-gorsel">[ Görsel Alanı ]</div>
         </section>
 
-        <!-- 3) KARTLAR — 30vh, flex-wrap: wrap, gap -->
         <section class="kartlar">
             <div class="kart"><h3>Kart 1</h3><p>HTML5 temelleri</p></div>
             <div class="kart"><h3>Kart 2</h3><p>CSS3 seçiciler</p></div>
-            <div class="kart"><h3>Kart 3</h3><p> layout</p></div>
+            <div class="kart"><h3>Kart 3</h3><p>Flex layout</p></div>
             <div class="kart"><h3>Kart 4</h3><p>Box model</p></div>
             <div class="kart"><h3>Kart 5</h3><p>Responsive tasarım</p></div>
             <div class="kart"><h3>Kart 6</h3><p>Form elemanları</p></div>
         </section>
 
-        <!-- 4) FLEX-GROW — 20vh, grow 1/2/1, align-items: stretch -->
         <section class="grow-bolum">
             <div class="grow-kutu grow-kutu-1">flex-grow: 1</div>
             <div class="grow-kutu grow-kutu-2">flex-grow: 2</div>
             <div class="grow-kutu grow-kutu-3">flex-grow: 1</div>
         </section>
 
-        <!-- 5) FOOTER — 10vh, justify-content: center, align-items: center -->
         <footer class="footer">
-            &copy; Merve Sueda Aydın — Lab 4  Uygulaması
+            &copy; Merve Sueda Aydın — Lab 4 Uygulaması
             <a href="index.html">Portfolyoya Dön</a>
         </footer>
-
     </div>
 
 </body>
