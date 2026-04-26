@@ -5,19 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Öğrenci Not Hesaplama</title>
     <style>
-        /* Modern Özgün Renk Paleti (Birim Dönüştürücü ile Aynı) */
         :root {
             --ana-bg: #f4f7fa;
             --kart-bg: #ffffff;
-            --primary: #2563eb; 
+            --primary: #2563eb;
             --primary-hover: #1d4ed8;
-            --accent: #06b6d4; 
-            --text-ana: #1e293b; 
+            --accent: #06b6d4;
+            --text-ana: #1e293b;
             --text-ikincil: #64748b;
             --border: #e2e8f0;
-            --sonuc-bg: #f0fdf4; 
+            --sonuc-bg: #f0fdf4;
             --sonuc-text: #166534;
             --hata-renk: #e11d48;
+            --nav-bg: #0f172a;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -30,34 +30,35 @@
             min-height: 100vh;
         }
 
-        /* Navigasyon */
         nav {
-            background: var(--kart-bg);
-            padding: 1rem 2rem;
+            background: var(--nav-bg);
+            padding: 0 2rem;
+            height: 60px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
         }
 
         .logo {
             font-weight: 800;
             font-size: 1.2rem;
-            color: var(--primary);
+            color: #fff;
             letter-spacing: -0.5px;
         }
 
         nav ul { list-style: none; display: flex; gap: 20px; }
         nav ul li a {
             text-decoration: none;
-            color: var(--text-ikincil);
+            color: #e2e8f0;
             font-size: 0.9rem;
             font-weight: 500;
-            transition: color 0.3s;
+            padding: 6px 12px;
+            border-radius: 6px;
+            transition: all 0.2s;
         }
-        nav ul li a:hover { color: var(--primary); }
+        nav ul li a:hover { background: rgba(255,255,255,0.1); color: #fff; }
 
-        /* Sayfa ve Kart Yapısı */
         .sayfa {
             max-width: 600px;
             margin: 50px auto;
@@ -68,7 +69,7 @@
             background: var(--kart-bg);
             border-radius: 16px;
             padding: 40px;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05);
             border: 1px solid var(--border);
         }
 
@@ -81,10 +82,7 @@
             padding-left: 15px;
         }
 
-        /* Form Elemanları */
-        .form-grup {
-            margin-bottom: 20px;
-        }
+        .form-grup { margin-bottom: 20px; }
 
         .form-grup label {
             display: block;
@@ -108,10 +106,9 @@
         .form-grup input:focus {
             border-color: var(--primary);
             background-color: #fff;
-            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+            box-shadow: 0 0 0 4px rgba(37,99,235,0.1);
         }
 
-        /* Buton */
         .btn-hesapla {
             width: 100%;
             padding: 14px;
@@ -131,14 +128,13 @@
             transform: translateY(-1px);
         }
 
-        /* Sonuç Alanı */
         .sonuc-kutu {
             display: none;
             margin-top: 30px;
             padding: 25px;
             background: var(--sonuc-bg);
             border-radius: 12px;
-            border: 1px solid rgba(22, 101, 52, 0.1);
+            border: 1px solid rgba(22,101,52,0.1);
             animation: fadeIn 0.5s ease;
         }
 
@@ -165,11 +161,7 @@
             color: var(--text-ikincil);
         }
 
-        .sonuc-satir span {
-            font-weight: 700;
-            color: var(--text-ana);
-        }
-
+        .sonuc-satir span { font-weight: 700; color: var(--text-ana); }
         .sonuc-gecti { color: #16a34a !important; }
         .sonuc-kaldi { color: #dc2626 !important; }
 
@@ -190,7 +182,6 @@
             font-size: 0.85rem;
             transition: color 0.3s;
         }
-
         .geri-link:hover { color: var(--primary); }
     </style>
 </head>
@@ -250,7 +241,6 @@
             const vize = parseFloat(vizeStr);
             const fin = parseFloat(finalStr);
 
-            // Doğrulama
             if (!ad || isNaN(vize) || isNaN(fin) || vize < 0 || vize > 100 || fin < 0 || fin > 100) {
                 hata.style.display = 'block';
                 sonucKutu.classList.remove('goster');
@@ -285,11 +275,9 @@
             sonucKutu.classList.add('goster');
         }
 
-        // Enter tuşu desteği
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Enter') hesapla();
         });
     </script>
-
 </body>
 </html>
