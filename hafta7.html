@@ -8,36 +8,30 @@
     <!-- Bootstrap 5.3.3 CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Özel CSS -->
+    <!-- Minimal özel CSS (yalnızca tema geçişi + Bootstrap'ın yapamadıkları) -->
     <link rel="stylesheet" href="styles/hafta7.css">
 </head>
 <body>
 
     <!-- ============================================================
-         NAVBAR
+         NAVBAR — Bootstrap navbar-dark bg-dark
     ============================================================ -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top shadow-sm">
         <div class="container">
-            <a class="navbar-brand fw-bold" href="index.html">WP Lab</a>
+            <a class="navbar-brand fw-bold fs-5" href="index.html">WP Lab</a>
 
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+            <button class="navbar-toggler" type="button"
+                    data-bs-toggle="collapse" data-bs-target="#navMenu"
+                    aria-controls="navMenu" aria-expanded="false">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
             <div class="collapse navbar-collapse" id="navMenu">
                 <ul class="navbar-nav ms-auto gap-1">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="#hero">Ana Sayfa</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#atolyeler">Atölyeler</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#basvuru">Başvuru</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#sonuc">Sonuç</a>
-                    </li>
+                    <li class="nav-item"><a class="nav-link active" href="#hero">Ana Sayfa</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#atolyeler">Atölyeler</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#basvuru">Başvuru</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#sonuc">Sonuç</a></li>
                 </ul>
             </div>
         </div>
@@ -45,46 +39,50 @@
 
 
     <!-- ============================================================
-         HERO BÖLÜMİ
+         HERO — Bootstrap + minimal hero-bg class (gradient için)
     ============================================================ -->
-    <section class="hero-bolumu text-white" id="hero">
-        <div class="container">
+    <section class="hero-bg text-white py-5" id="hero">
+        <div class="container py-4">
             <div class="row align-items-center g-5">
+
+                <!-- Sol: Başlık ve butonlar -->
                 <div class="col-lg-7">
-                    <div class="hero-etiket">Hafta 7 Laboratuvarı</div>
-                    <h1 class="text-white">
+                    <span class="badge bg-primary bg-opacity-75 mb-3 px-3 py-2 fw-semibold">
+                        Hafta 7 Laboratuvarı
+                    </span>
+                    <h1 class="display-5 fw-bold text-white mb-3">
                         Bootstrap ve JavaScript ile<br>Etkinlik Kayıt Sayfası
                     </h1>
-                    <p class="lead text-white mb-4">
-                        Bu sayfada Bootstrap ile responsive bir arayüz tasarlanır; JavaScript ile de tema
-                        değiştirme ve form verilerinden başvuru özeti üretme işlemleri yapılır.
+                    <p class="lead text-white-50 mb-4">
+                        Bu sayfada Bootstrap ile responsive bir arayüz tasarlanır;
+                        JavaScript ile de tema değiştirme ve form verilerinden başvuru özeti üretme işlemleri yapılır.
                     </p>
                     <div class="d-flex flex-wrap gap-3">
-                        <a href="#basvuru" class="btn btn-light fw-bold px-4 py-2">
+                        <a href="#basvuru" class="btn btn-light fw-bold px-4">
                             Başvuru Formuna Git
                         </a>
-                        <button id="tema-butonu" class="btn btn-outline-dark fw-semibold px-4 py-2"
-                                style="background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.4); color:#fff;">
+                        <button id="tema-butonu" class="btn btn-outline-light fw-semibold px-4">
                             🌙 Koyu Temaya Geç
                         </button>
                     </div>
                 </div>
 
+                <!-- Sağ: Bilgi kutusu -->
                 <div class="col-lg-5">
-                    <div class="hero-bilgi-kutu text-white">
-                        <h5>Neler Kullanıldı?</h5>
-                        <div>
-                            <span class="tech-badge bg-primary text-white">Navbar</span>
-                            <span class="tech-badge bg-success text-white">Grid</span>
-                            <span class="tech-badge bg-warning text-dark">Card</span>
-                            <span class="tech-badge bg-danger text-white">Form</span>
-                            <span class="tech-badge bg-info text-dark">Alert</span>
+                    <div class="bg-white bg-opacity-10 border border-white border-opacity-25 rounded-3 p-4">
+                        <h5 class="fw-bold text-white mb-3">Neler Kullanıldı?</h5>
+                        <div class="mb-3">
+                            <span class="badge bg-primary me-1">Navbar</span>
+                            <span class="badge bg-success me-1">Grid</span>
+                            <span class="badge bg-warning text-dark me-1">Card</span>
+                            <span class="badge bg-danger me-1">Form</span>
+                            <span class="badge bg-info text-dark me-1">Alert</span>
                         </div>
-                        <ul class="mt-3">
-                            <li>✓ Bootstrap CDN kullanımı</li>
-                            <li>✓ Responsive sütun yapısı</li>
-                            <li>✓ JavaScript ile form verisi okuma</li>
-                            <li>✓ Tema değiştirme işlemi</li>
+                        <ul class="list-unstyled text-white-75 mb-0" style="font-size:0.88rem;">
+                            <li class="py-2 border-bottom border-white border-opacity-10">✓ Bootstrap CDN kullanımı</li>
+                            <li class="py-2 border-bottom border-white border-opacity-10">✓ Responsive sütun yapısı</li>
+                            <li class="py-2 border-bottom border-white border-opacity-10">✓ JavaScript ile form verisi okuma</li>
+                            <li class="py-2">✓ Tema değiştirme işlemi</li>
                         </ul>
                     </div>
                 </div>
@@ -94,9 +92,9 @@
 
 
     <!-- ============================================================
-         ATÖLYE KARTLARI (en az 3 card)
+         ATÖLYE KARTLARI — Bootstrap card + grid
     ============================================================ -->
-    <section class="kart-bolumu py-5" id="atolyeler">
+    <section class="py-5" id="atolyeler">
         <div class="container">
             <div class="text-center mb-5">
                 <h2 class="fw-bold">Atölye İçerikleri</h2>
@@ -104,11 +102,12 @@
             </div>
 
             <div class="row g-4">
+
                 <!-- Kart 1 -->
                 <div class="col-md-4">
-                    <div class="card shadow-sm h-100">
+                    <div class="card shadow-sm h-100 card-hover">
                         <div class="card-body p-4">
-                            <div class="kart-no bg-primary text-white">01</div>
+                            <span class="badge bg-primary mb-3">01</span>
                             <h5 class="card-title fw-bold">Responsive Tasarım</h5>
                             <p class="card-text text-muted" style="font-size:0.88rem;">
                                 Container, row, col yapıları ile farklı ekranlarda
@@ -121,9 +120,9 @@
 
                 <!-- Kart 2 -->
                 <div class="col-md-4">
-                    <div class="card shadow-sm h-100">
+                    <div class="card shadow-sm h-100 card-hover">
                         <div class="card-body p-4">
-                            <div class="kart-no bg-success text-white">02</div>
+                            <span class="badge bg-success mb-3">02</span>
                             <h5 class="card-title fw-bold">Form Yapıları</h5>
                             <p class="card-text text-muted" style="font-size:0.88rem;">
                                 Bootstrap form-control, form-select ve form-check
@@ -136,9 +135,9 @@
 
                 <!-- Kart 3 -->
                 <div class="col-md-4">
-                    <div class="card shadow-sm h-100">
+                    <div class="card shadow-sm h-100 card-hover">
                         <div class="card-body p-4">
-                            <div class="kart-no bg-warning text-dark">03</div>
+                            <span class="badge bg-warning text-dark mb-3">03</span>
                             <h5 class="card-title fw-bold">JavaScript Etkileşimi</h5>
                             <p class="card-text text-muted" style="font-size:0.88rem;">
                                 Form gönderildiğinde özet kart oluşturulur ve tema
@@ -148,6 +147,7 @@
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </section>
@@ -159,25 +159,28 @@
     <section class="py-5 bg-light" id="bilgi">
         <div class="container">
             <div class="row g-4">
+
                 <!-- Sol: Etkinlik Bilgileri -->
                 <div class="col-lg-5">
-                    <div class="bilgi-bolumu h-100">
-                        <h4 class="fw-bold mb-4">Etkinlik Bilgileri</h4>
-                        <div class="bilgi-satir">
-                            <span class="etiket">Tarih</span>
-                            <span class="badge bg-primary px-3 py-2">12 Mayıs</span>
-                        </div>
-                        <div class="bilgi-satir">
-                            <span class="etiket">Saat</span>
-                            <span class="badge bg-dark px-3 py-2">13:30</span>
-                        </div>
-                        <div class="bilgi-satir">
-                            <span class="etiket">Yer</span>
-                            <span class="badge bg-success px-3 py-2">Lab 205</span>
-                        </div>
-                        <div class="bilgi-satir">
-                            <span class="etiket">Kontenjan</span>
-                            <span class="badge bg-danger px-3 py-2">40 Kişi</span>
+                    <div class="card shadow-sm h-100 bilgi-panel">
+                        <div class="card-body p-4">
+                            <h4 class="fw-bold mb-4">Etkinlik Bilgileri</h4>
+                            <div class="d-flex justify-content-between align-items-center py-2 border-bottom">
+                                <span class="text-muted fw-medium">Tarih</span>
+                                <span class="badge bg-primary px-3 py-2">12 Mayıs</span>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center py-2 border-bottom">
+                                <span class="text-muted fw-medium">Saat</span>
+                                <span class="badge bg-dark px-3 py-2">13:30</span>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center py-2 border-bottom">
+                                <span class="text-muted fw-medium">Yer</span>
+                                <span class="badge bg-success px-3 py-2">Lab 205</span>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center py-2">
+                                <span class="text-muted fw-medium">Kontenjan</span>
+                                <span class="badge bg-danger px-3 py-2">40 Kişi</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -187,45 +190,47 @@
                     <h4 class="fw-bold mb-4">Neden Katılmalısınız?</h4>
                     <div class="row g-3">
                         <div class="col-sm-6">
-                            <div class="neden-kutu">
-                                <h6>Bootstrap pratiği</h6>
-                                <p>Hazır sınıflarla kısa sürede profesyonel arayüz oluşturmayı görürsünüz.</p>
+                            <div class="bg-primary bg-opacity-10 border border-primary border-opacity-25 rounded-3 p-3 h-100">
+                                <h6 class="fw-bold text-primary mb-2">Bootstrap pratiği</h6>
+                                <p class="text-primary mb-0" style="font-size:0.83rem; opacity:0.8;">Hazır sınıflarla kısa sürede profesyonel arayüz oluşturmayı görürsünüz.</p>
                             </div>
                         </div>
                         <div class="col-sm-6">
-                            <div class="neden-kutu">
-                                <h6>JavaScript mantığı</h6>
-                                <p>DOM erişimi, event listener ve koşullu yapı örneği uygulanır.</p>
+                            <div class="bg-success bg-opacity-10 border border-success border-opacity-25 rounded-3 p-3 h-100">
+                                <h6 class="fw-bold text-success mb-2">JavaScript mantığı</h6>
+                                <p class="text-success mb-0" style="font-size:0.83rem; opacity:0.8;">DOM erişimi, event listener ve koşullu yapı örneği uygulanır.</p>
                             </div>
                         </div>
                         <div class="col-sm-6">
-                            <div class="neden-kutu">
-                                <h6>Gerçek senaryo</h6>
-                                <p>Sıfırdan gerçekçi bir etkinlik kayıt sayfası geliştirilir.</p>
+                            <div class="bg-warning bg-opacity-10 border border-warning border-opacity-25 rounded-3 p-3 h-100">
+                                <h6 class="fw-bold text-warning mb-2">Gerçek senaryo</h6>
+                                <p class="text-warning mb-0" style="font-size:0.83rem; opacity:0.8;">Sıfırdan gerçekçi bir etkinlik kayıt sayfası geliştirilir.</p>
                             </div>
                         </div>
                         <div class="col-sm-6">
-                            <div class="neden-kutu">
-                                <h6>GitHub Pages uyumu</h6>
-                                <p>Sayfa doğrudan mevcut ana sayfadan erişilebilir şekilde hazırlanır.</p>
+                            <div class="bg-info bg-opacity-10 border border-info border-opacity-25 rounded-3 p-3 h-100">
+                                <h6 class="fw-bold text-info mb-2">GitHub Pages uyumu</h6>
+                                <p class="text-info mb-0" style="font-size:0.83rem; opacity:0.8;">Sayfa doğrudan mevcut ana sayfadan erişilebilir şekilde hazırlanır.</p>
                             </div>
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </section>
 
 
     <!-- ============================================================
-         BAŞVURU FORMU
+         BAŞVURU FORMU — Bootstrap form bileşenleri
     ============================================================ -->
-    <section class="form-bolumu py-5" id="basvuru">
+    <section class="py-5" id="basvuru">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-8">
                     <div class="card shadow-sm">
                         <div class="card-body p-4 p-md-5">
+
                             <div class="d-flex justify-content-between align-items-start mb-4">
                                 <div>
                                     <h3 class="fw-bold mb-1">Başvuru Formu</h3>
@@ -237,12 +242,14 @@
                             </div>
 
                             <!-- Uyarı Alanı -->
-                            <div id="uyari-alani" class="alert alert-warning alert-dismissible" role="alert">
+                            <div id="uyari-alani" class="alert alert-warning alert-dismissible fade show d-none" role="alert">
                                 ⚠️ Lütfen tüm zorunlu alanları doldurun.
-                                <button type="button" class="btn-close" onclick="document.getElementById('uyari-alani').style.display='none'"></button>
+                                <button type="button" class="btn-close"
+                                        onclick="document.getElementById('uyari-alani').classList.add('d-none')"></button>
                             </div>
 
                             <form id="basvuru-formu" novalidate>
+
                                 <!-- Ad Soyad + E-posta -->
                                 <div class="row g-3 mb-3">
                                     <div class="col-md-6">
@@ -323,6 +330,7 @@
                                         Formu Temizle
                                     </button>
                                 </div>
+
                             </form>
                         </div>
                     </div>
@@ -339,10 +347,10 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-8">
-                    <div id="sonuc-alani">
-                        <div class="text-muted" style="font-size:0.88rem;">
+                    <div id="sonuc-alani" class="alert alert-info fade-in">
+                        <span class="text-muted" style="font-size:0.88rem;">
                             Henüz başvuru özeti oluşturulmadı. Formu doldurduktan sonra sonuç burada görünecek.
-                        </div>
+                        </span>
                     </div>
                 </div>
             </div>
@@ -353,9 +361,9 @@
     <!-- ============================================================
          FOOTER
     ============================================================ -->
-    <footer class="py-4 text-center text-white" style="background:#0f172a;">
+    <footer class="bg-dark text-white py-4 text-center">
         <div class="container">
-            <p class="mb-1" style="font-size:0.9rem; opacity:0.7;">
+            <p class="mb-1 text-white-50" style="font-size:0.9rem;">
                 &copy; 2026 Merve Sueda Aydın — Hafta 7 Laboratuvar Uygulaması
             </p>
             <a href="index.html" class="text-info text-decoration-none" style="font-size:0.85rem;">
@@ -365,10 +373,10 @@
     </footer>
 
 
-    <!-- Bootstrap JS Bundle (CDN) -->
+    <!-- Bootstrap JS Bundle CDN -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Hafta 7 JavaScript -->
+    <!-- Hafta 7 JavaScript (ayrı dosya) -->
     <script src="scripts/hafta7.js"></script>
 
 </body>
