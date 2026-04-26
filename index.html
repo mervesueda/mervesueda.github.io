@@ -4,211 +4,792 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Merve Sueda Aydın - Portfolyo</title>
-
-    <!-- Bootstrap 5.3.3 CDN -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
     <style>
-        /* Sadece mevcut portfolyo kartı düzeni için — Bootstrap'la ifade edilemeyen min. ekler */
         :root {
+            --ana-bg: #f4f7fa;
+            --kart-bg: #ffffff;
             --primary: #2563eb;
+            --primary-hover: #1d4ed8;
             --accent: #06b6d4;
-            --border: #e2e8f0;
+            --text-ana: #1e293b;
             --text-ikincil: #64748b;
+            --border: #e2e8f0;
             --sol-kutu-bg: #fffbf2;
+            --sag-kutu-bg: #f8fafc;
+            --danger: #e11d48;
+            --nav-bg: #0f172a;
+            --nav-text: #e2e8f0;
         }
-        body { background: #f4f7fa; }
 
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: var(--ana-bg);
+            color: var(--text-ana);
+            line-height: 1.6;
+        }
+
+        /* ── NAVİGASYON (SİYAH) ── */
+        nav {
+            background: var(--nav-bg);
+            border-bottom: 1px solid #1e293b;
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            height: 60px;
+        }
+
+        nav .logo {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: #fff;
+            letter-spacing: -0.5px;
+        }
+
+        nav ul { list-style: none; display: flex; gap: 4px; }
+        nav ul li a {
+            text-decoration: none;
+            color: var(--nav-text);
+            font-size: 0.88rem;
+            font-weight: 500;
+            padding: 8px 14px;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            display: block;
+        }
+        nav ul li a:hover,
+        nav ul li a.aktif {
+            background: rgba(255,255,255,0.1);
+            color: #fff;
+        }
+        nav ul li a.aktif {
+            background: var(--primary);
+        }
+
+        /* ── PANELLER ── */
+        .panel { display: none; }
+        .panel.aktif-panel { display: block; }
+
+        /* ── SAYFA KAPSAYICI ── */
         .sayfa {
             max-width: 900px;
             margin: 40px auto;
-            background: #fff;
+            background: var(--kart-bg);
             border: 1px solid var(--border);
             border-radius: 16px;
             padding: 40px;
             box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05);
         }
-        .icerik-kutu {
+
+        .aciklama {
+            font-size: 1.1rem;
+            color: var(--text-ana);
+            margin-bottom: 30px;
+            padding-bottom: 25px;
+            border-bottom: 2px solid var(--ana-bg);
+            font-weight: 500;
+        }
+        .aciklama span { color: var(--primary); font-weight: 700; }
+
+        /* ── SÜTUN YAPISI ── */
+        .sutunlar { display: flex; gap: 25px; }
+
+        .icerik {
+            flex: 1.2;
             background: var(--sol-kutu-bg);
             border: 1px solid #f2e3c0;
             border-radius: 12px;
             padding: 25px;
         }
-        .bilgi-kutu {
-            background: #f8fafc;
+
+        aside {
+            flex: 1;
+            background: var(--sag-kutu-bg);
             border: 1px solid var(--border);
             border-radius: 12px;
             padding: 25px;
         }
-        .lab-link-kutu { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; padding-top: 20px; border-top: 1px solid #f0f0f0; }
-        .lab-link-kutu a {
-            display: block;
-            background: #fff;
-            color: #1e293b;
-            text-decoration: none;
-            padding: 11px 16px;
-            border-radius: 10px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            border: 1px solid var(--border);
-            transition: all 0.25s ease;
+
+        h2 {
+            font-size: 1.1rem;
+            color: var(--text-ana);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
-        .lab-link-kutu a:hover { border-color: var(--primary); color: var(--primary); transform: translateX(4px); }
-        .hafta7-btn {
-            background: linear-gradient(135deg, var(--primary), var(--accent)) !important;
-            color: #fff !important;
-            border: none !important;
-            box-shadow: 0 4px 14px rgba(37,99,235,0.3);
+
+        .icerik p, aside p {
+            font-size: 0.95rem;
+            color: var(--text-ikincil);
+            margin-bottom: 15px;
+            text-align: justify;
         }
-        .hafta7-btn:hover { transform: translateY(-2px) !important; box-shadow: 0 8px 20px rgba(37,99,235,0.4) !important; }
-        .sosyal-linkler { list-style: none; padding: 0; }
+
+        /* ── SOSYAL LİNKLER ── */
+        .sosyal-linkler { list-style: none; }
         .sosyal-linkler li { margin-bottom: 10px; }
-        .sosyal-linkler a { text-decoration: none; font-size: 0.9rem; color: var(--primary); font-weight: 600; display: flex; align-items: center; gap: 8px; transition: color 0.3s; }
+        .sosyal-linkler a {
+            text-decoration: none;
+            font-size: 0.9rem;
+            color: var(--primary);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: color 0.3s;
+        }
         .sosyal-linkler a:hover { color: var(--accent); }
-        .lab6-grup { display: flex; gap: 10px; }
-        .lab6-grup a { flex: 1; text-align: center; background: var(--primary) !important; color: #fff !important; border: none !important; }
-        .lab6-grup a:hover { background: #1d4ed8 !important; transform: translateY(-2px) !important; }
-        .iletisim-panel { display: none; }
-        @keyframes fadeIn { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
-        @media (max-width: 768px) { .sayfa { margin: 10px; padding: 20px; } }
+
+        /* ── LAB LİNK KUTUSU ── */
+        .lab-link-kutu {
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .lab-link-kutu p.lab-aciklama {
+            font-size: 0.85rem;
+            color: var(--text-ikincil);
+            margin-bottom: 10px;
+        }
+
+        /* ── HAFTA 7 BÜYÜK BUTON ── */
+        .hafta7-buton {
+            display: block;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            padding: 14px 20px;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 10px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        .hafta7-buton:hover {
+            background: var(--primary-hover);
+            transform: translateY(-2px);
+            color: white;
+        }
+
+        /* ── FOOTER ── */
+        footer {
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--text-ikincil);
+            padding-top: 30px;
+            border-top: 1px solid var(--border);
+            margin-top: 35px;
+        }
+
+        /* ── HAKKIMDA PANELİ ── */
+        .hakkimda-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .bilgi-kart {
+            background: var(--ana-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+        }
+        .bilgi-kart h3 {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        .bilgi-kart ul {
+            list-style: none;
+            padding: 0;
+        }
+        .bilgi-kart ul li {
+            font-size: 0.9rem;
+            color: var(--text-ikincil);
+            padding: 5px 0;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .bilgi-kart ul li:last-child { border-bottom: none; }
+
+        .profil-baslik {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 25px;
+            padding-bottom: 25px;
+            border-bottom: 2px solid var(--ana-bg);
+        }
+        .profil-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+            flex-shrink: 0;
+        }
+        .profil-bilgi h1 {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--text-ana);
+        }
+        .profil-bilgi p {
+            font-size: 0.9rem;
+            color: var(--text-ikincil);
+            margin-top: 4px;
+        }
+
+        .beceri-bar {
+            margin: 8px 0;
+        }
+        .beceri-bar .etiket {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.82rem;
+            color: var(--text-ikincil);
+            margin-bottom: 4px;
+        }
+        .beceri-bar .bar {
+            height: 6px;
+            background: var(--border);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        .beceri-bar .dolu {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: 3px;
+        }
+
+        /* ── PROJELER PANELİ ── */
+        .projeler-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .proje-kart {
+            background: var(--kart-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            transition: all 0.3s ease;
+        }
+        .proje-kart:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px -5px rgba(37,99,235,0.15);
+            border-color: var(--primary);
+        }
+        .proje-kart .proje-etiket {
+            display: inline-block;
+            background: #dbeafe;
+            color: var(--primary);
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 20px;
+            margin-bottom: 12px;
+        }
+        .proje-kart h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-ana);
+            margin-bottom: 8px;
+        }
+        .proje-kart p {
+            font-size: 0.85rem;
+            color: var(--text-ikincil);
+            margin-bottom: 16px;
+            line-height: 1.5;
+        }
+        .proje-kart a {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.85rem;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+        .proje-kart a:hover { color: var(--primary-hover); }
+
+        /* ── LABORATİUVAR PANELİ ── */
+        .lab-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 16px;
+            margin-top: 20px;
+        }
+        .lab-kart {
+            background: var(--kart-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+            display: block;
+        }
+        .lab-kart:hover {
+            transform: translateY(-3px);
+            border-color: var(--primary);
+            box-shadow: 0 8px 20px -4px rgba(37,99,235,0.15);
+        }
+        .lab-kart .lab-no {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--text-ikincil);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+        .lab-kart h3 {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--text-ana);
+            margin-bottom: 6px;
+        }
+        .lab-kart p {
+            font-size: 0.82rem;
+            color: var(--text-ikincil);
+        }
+        .lab-kart.vurgulu {
+            border-color: var(--primary);
+            background: #eff6ff;
+        }
+        .lab-kart.vurgulu .lab-no { color: var(--primary); }
+
+        /* ── İLETİŞİM ── */
+        .iletisim-panel { animation: fadeIn 0.5s ease; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--text-ana);
+            margin-bottom: 8px;
+        }
+
+        input[type="text"], input[type="email"], input[type="password"], select, textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            font-size: 0.95rem;
+            background: #fcfdfe;
+            outline: none;
+            transition: all 0.3s;
+        }
+        input:focus, select:focus, textarea:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(37,99,235,0.1);
+        }
+
+        .grup-kutu {
+            background: var(--ana-bg);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid var(--border);
+        }
+        .grup-kutu label {
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            margin-bottom: 8px;
+        }
+
+        .btn-row { display: flex; gap: 15px; margin-top: 10px; }
+        .btn-gonder {
+            flex: 2;
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 14px;
+            font-weight: 700;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .btn-temizle {
+            flex: 1;
+            background: #f1f5f9;
+            color: var(--danger);
+            border: 1px solid var(--border);
+            padding: 14px;
+            font-weight: 700;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        .btn-gonder:hover { background: var(--primary-hover); }
+        .btn-temizle:hover { background: #fee2e2; }
+
+        .contact-container { width: 100%; max-width: 600px; margin: auto; }
+        .iletisim-baslik {
+            text-align: center;
+            font-size: 1.8rem;
+            color: var(--text-ana);
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .sutunlar { flex-direction: column; }
+            .sayfa { margin: 10px; padding: 20px; }
+            .hakkimda-grid { grid-template-columns: 1fr; }
+            .projeler-grid { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body>
 
-    <!-- Bootstrap Navbar — navbar-dark bg-dark (tüm sayfalarla aynı) -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top shadow-sm">
-        <div class="container-fluid px-4">
-            <span class="navbar-brand fw-bold">Merve Sueda Aydın</span>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navIndex">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navIndex">
-                <ul class="navbar-nav ms-auto gap-1">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="#" id="nav-ana" onclick="goster('ana'); return false;">Ana Sayfa</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" onclick="goster('ana'); return false;">Hakkımda</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" onclick="goster('ana'); return false;">Projeler</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" id="nav-iletisim" onclick="goster('iletisim'); return false;">İletişim</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
+    <nav>
+        <span class="logo">Merve Sueda Aydın</span>
+        <ul>
+            <li><a href="#" class="aktif" id="nav-ana" onclick="goster('ana'); return false;">Ana Sayfa</a></li>
+            <li><a href="#" id="nav-hakkimda" onclick="goster('hakkimda'); return false;">Hakkımda</a></li>
+            <li><a href="#" id="nav-projeler" onclick="goster('projeler'); return false;">Projeler</a></li>
+            <li><a href="#" id="nav-lab" onclick="goster('lab'); return false;">Laboratuvar</a></li>
+            <li><a href="#" id="nav-iletisim" onclick="goster('iletisim'); return false;">İletişim</a></li>
+        </ul>
     </nav>
 
-    <!-- Ana Panel -->
-    <div class="sayfa" id="ana-panel">
-        <p style="font-size:1.1rem; color:#1e293b; margin-bottom:25px; padding-bottom:20px; border-bottom:2px solid #f4f7fa; font-weight:500;">
-            Merhaba, ben <span style="color:#2563eb; font-weight:700;">Merve</span>. Bilgisayar Mühendisliği 3. sınıf öğrencisiyim.
-            Yapay zeka ve veri analizi alanlarına ilgi duyuyorum. Web dünyasına bu portfolyo ile ilk adımı attım.
-        </p>
+    <!-- ══ ANA SAYFA ══ -->
+    <div class="panel aktif-panel" id="ana-panel">
+        <div class="sayfa">
+            <p class="aciklama">
+                Merhaba, ben <span>Merve</span>. Bilgisayar Mühendisliği 3. sınıf öğrencisiyim.
+                Yapay zeka ve veri analizi alanlarına ilgi duyuyorum. Web dünyasına bu portfolyo ile ilk adımı attım.
+            </p>
 
-        <div class="d-flex gap-4 flex-wrap">
-            <section class="icerik-kutu flex-grow-1" style="flex-basis:55%;">
-                <h2 style="font-size:1.1rem; color:#1e293b; margin-bottom:15px; display:flex; align-items:center; gap:8px;">🚀 İçerik ve Gelişim</h2>
-                <p style="font-size:0.95rem; color:#64748b; margin-bottom:12px;">
-                    Bu web sitesi, HTML ve CSS temellerini öğrenirken geliştirdiğim dinamik bir yapıdır.
-                    Grup seçiciler ve modern layout sistemlerini kullanarak görsel hiyerarşiyi kurguladım.
-                </p>
-                <p style="font-size:0.95rem; color:#64748b; margin-bottom:0;">
-                    Şu an <strong>JavaScript</strong> ile kullanıcı etkileşimli uygulamalar geliştiriyor,
-                    mantıksal algoritmaları arayüzlere döküyorum.
-                </p>
+            <div class="sutunlar">
+                <section class="icerik">
+                    <h2>🚀 İçerik ve Gelişim</h2>
+                    <p>
+                        Bu web sitesi, HTML ve CSS temellerini öğrenirken geliştirdiğim dinamik bir yapıdır.
+                        Grup seçiciler ve modern layout sistemlerini kullanarak görsel hiyerarşiyi kurguladım.
+                    </p>
+                    <p>
+                        Şu an <strong>JavaScript</strong> ile kullanıcı etkileşimli uygulamalar geliştiriyor,
+                        mantıksal algoritmaları arayüzlere döküyorum.
+                    </p>
 
-                <div class="lab-link-kutu">
-                    <a href="flexbox.html">🔗 Lab 4 — Flexbox Uygulaması</a>
-                    <a href="lab-position.html">📌 Lab 5 — CSS Position Duyuru Kartı</a>
-
-                    <p style="font-size:0.78rem; text-transform:uppercase; letter-spacing:1px; color:#64748b; font-weight:700; margin:5px 0 0;">🧪 JavaScript Laboratuvarı</p>
-                    <div class="lab6-grup">
-                        <a href="uygulama1.html">📊 Not Hesaplama</a>
-                        <a href="uygulama2.html">🔄 Birim Dönüştürücü</a>
+                    <div class="lab-link-kutu">
+                        <p class="lab-aciklama">📚 Laboratuvar çalışmalarına ulaşmak için üst menüden <strong>Laboratuvar</strong> sekmesini kullanın.</p>
+                        <a href="hafta7.html" class="hafta7-buton">🚀 Hafta 7 Uygulamasına Git</a>
                     </div>
+                </section>
 
-                    <p style="font-size:0.78rem; text-transform:uppercase; letter-spacing:1px; color:#64748b; font-weight:700; margin:5px 0 0;">⚡ Hafta 7 Laboratuvarı</p>
-                    <a href="hafta7.html" class="hafta7-btn" style="text-align:center;">🎯 Hafta 7 Uygulamasına Git</a>
+                <aside>
+                    <h2>ℹ️ Bilgi Paneli</h2>
+                    <p>
+                        CSS Box Model yapısını kullanarak alanları (padding/margin) optimize ettim.
+                        Grid ve Flexbox yapıları ile duyarlı (responsive) bir tasarım hedefledim.
+                    </p>
+                    <ul class="sosyal-linkler">
+                        <li><a href="https://github.com/mervesueda" target="_blank">⬡ GitHub</a></li>
+                        <li><a href="https://linkedin.com/in/mervesuedaaydin" target="_blank">in LinkedIn</a></li>
+                        <li><a href="https://kaggle.com/mervesuedaaydn" target="_blank">◈ Kaggle</a></li>
+                        <li><a href="mailto:mervesueda2005@gmail.com">✉ E-posta Gönder</a></li>
+                    </ul>
+                </aside>
+            </div>
+
+            <footer>
+                &copy; 2026 Merve Sueda Aydın | Mühendislik Portfolyosu
+            </footer>
+        </div>
+    </div>
+
+    <!-- ══ HAKKIMDA ══ -->
+    <div class="panel" id="hakkimda-panel">
+        <div class="sayfa">
+            <div class="profil-baslik">
+                <div class="profil-avatar">👩‍💻</div>
+                <div class="profil-bilgi">
+                    <h1>Merve Sueda Aydın</h1>
+                    <p>Bilgisayar Mühendisliği Öğrencisi · 3. Sınıf</p>
+                    <p>📍 Türkiye &nbsp;·&nbsp; ✉️ mervesueda2005@gmail.com</p>
                 </div>
-            </section>
+            </div>
 
-            <aside class="bilgi-kutu flex-grow-1" style="flex-basis:35%;">
-                <h2 style="font-size:1.1rem; color:#1e293b; margin-bottom:15px; display:flex; align-items:center; gap:8px;">ℹ️ Bilgi Paneli</h2>
-                <p style="font-size:0.95rem; color:#64748b; margin-bottom:15px;">
-                    CSS Box Model yapısını kullanarak alanları (padding/margin) optimize ettim.
-                    Grid ve Flexbox yapıları ile duyarlı (responsive) bir tasarım hedefledim.
-                </p>
-                <ul class="sosyal-linkler">
-                    <li><a href="https://github.com/mervesueda" target="_blank">⬡ GitHub</a></li>
-                    <li><a href="https://linkedin.com/in/mervesuedaaydin" target="_blank">in LinkedIn</a></li>
-                    <li><a href="https://kaggle.com/mervesuedaaydn" target="_blank">◈ Kaggle</a></li>
-                    <li><a href="mailto:mervesueda2005@gmail.com">✉ E-posta Gönder</a></li>
-                </ul>
-            </aside>
+            <div class="hakkimda-grid">
+                <div class="bilgi-kart">
+                    <h3>👩‍🎓 Eğitim</h3>
+                    <ul>
+                        <li>🏛️ Bilgisayar Mühendisliği (2022 – devam)</li>
+                        <li>📊 GNO: 3.40 / 4.00</li>
+                        <li>🎓 Burslu Öğrenci</li>
+                    </ul>
+                </div>
+
+                <div class="bilgi-kart">
+                    <h3>💡 İlgi Alanları</h3>
+                    <ul>
+                        <li>🤖 Yapay Zeka & Makine Öğrenmesi</li>
+                        <li>📊 Veri Bilimi & Analitik</li>
+                        <li>🌐 Web Geliştirme</li>
+                        <li>🔬 Araştırma & Akademi</li>
+                    </ul>
+                </div>
+
+                <div class="bilgi-kart">
+                    <h3>🛠️ Teknik Beceriler</h3>
+                    <div class="beceri-bar">
+                        <div class="etiket"><span>HTML & CSS</span><span>85%</span></div>
+                        <div class="bar"><div class="dolu" style="width:85%"></div></div>
+                    </div>
+                    <div class="beceri-bar">
+                        <div class="etiket"><span>JavaScript</span><span>70%</span></div>
+                        <div class="bar"><div class="dolu" style="width:70%"></div></div>
+                    </div>
+                    <div class="beceri-bar">
+                        <div class="etiket"><span>Python</span><span>75%</span></div>
+                        <div class="bar"><div class="dolu" style="width:75%"></div></div>
+                    </div>
+                    <div class="beceri-bar">
+                        <div class="etiket"><span>SQL</span><span>60%</span></div>
+                        <div class="bar"><div class="dolu" style="width:60%"></div></div>
+                    </div>
+                </div>
+
+                <div class="bilgi-kart">
+                    <h3>🌍 Diller</h3>
+                    <ul>
+                        <li>🇹🇷 Türkçe — Anadil</li>
+                        <li>🇬🇧 İngilizce — B2 Seviyesi</li>
+                        <li>🇩🇪 Almanca — A1 Başlangıç</li>
+                    </ul>
+                </div>
+
+                <div class="bilgi-kart" style="grid-column: 1 / -1;">
+                    <h3>📝 Hakkımda</h3>
+                    <p style="font-size:0.92rem; color:#64748b; line-height:1.7; margin:0;">
+                        Merhaba! Ben Merve Sueda. Bilgisayar Mühendisliği bölümünde 3. sınıf öğrencisiyim.
+                        Yapay zeka, makine öğrenmesi ve veri analizi alanlarına büyük ilgi duyuyorum.
+                        Kaggle platformunda veri bilimi projeleri geliştiriyor, Python ile çeşitli analizler yapıyorum.
+                        Bu portfolyo sitesi, web geliştirme serüvenimin başlangıç noktası. HTML, CSS ve JavaScript
+                        öğrendikçe daha kapsamlı projeler ortaya çıkarmayı hedefliyorum.
+                    </p>
+                </div>
+            </div>
+
+            <footer>
+                &copy; 2026 Merve Sueda Aydın | Mühendislik Portfolyosu
+            </footer>
         </div>
-
-        <footer class="text-center mt-4 pt-4 border-top" style="font-size:0.85rem; color:#64748b;">
-            &copy; 2026 Merve Sueda Aydın | Mühendislik Portfolyosu
-        </footer>
     </div>
 
-    <!-- İletişim Paneli -->
-    <div class="sayfa iletisim-panel" id="iletisim-panel">
-        <h1 class="text-center mb-4" style="font-size:1.8rem; color:#1e293b;">Bana Ulaşın</h1>
-        <div style="width:100%; max-width:600px; margin:auto;">
-            <label class="d-block mb-1" style="font-size:0.85rem; font-weight:700;">Ad Soyad</label>
-            <input type="text" id="ad" class="form-control mb-3" placeholder="Adınız ve Soyadınız">
+    <!-- ══ PROJELER ══ -->
+    <div class="panel" id="projeler-panel">
+        <div class="sayfa">
+            <h2 style="font-size:1.4rem; margin-bottom:8px;">🗂️ Projelerim</h2>
+            <p style="color:#64748b; font-size:0.95rem;">Web ve veri bilimi alanında geliştirdiğim çalışmalar.</p>
 
-            <label class="d-block mb-1" style="font-size:0.85rem; font-weight:700;">E-posta Adresi</label>
-            <input type="email" id="eposta" class="form-control mb-3" placeholder="ornek@mail.com">
+            <div class="projeler-grid">
+                <div class="proje-kart">
+                    <span class="proje-etiket">HTML & CSS</span>
+                    <h3>Portfolyo Web Sitesi</h3>
+                    <p>GitHub Pages üzerinde yayınlanan, responsive tasarımlı kişisel portfolyo sayfası. CSS Flexbox ve Grid kullanıldı.</p>
+                    <a href="index.html">🔗 Sayfayı Gör</a>
+                </div>
 
-            <label class="d-block mb-1" style="font-size:0.85rem; font-weight:700;">Başvuru Takip Şifresi</label>
-            <input type="password" id="sifre" class="form-control mb-3" placeholder="Şifre belirleyin">
+                <div class="proje-kart">
+                    <span class="proje-etiket">CSS Flexbox</span>
+                    <h3>Lab 4 — Flexbox Uygulaması</h3>
+                    <p>100vh tam ekran düzeni, flex-direction: column yapısı ile navbar, hero, kartlar ve footer bölümlerini içeren uygulama.</p>
+                    <a href="flexbox.html" target="_blank">🔗 Uygulamayı Aç</a>
+                </div>
 
-            <label class="d-block mb-1" style="font-size:0.85rem; font-weight:700;">İletişim Tercihi</label>
-            <div class="bg-light border rounded p-3 mb-3">
-                <div class="form-check"><input class="form-check-input" type="radio" name="tercih" checked><label class="form-check-label">E-posta</label></div>
-                <div class="form-check"><input class="form-check-input" type="radio" name="tercih"><label class="form-check-label">Telefon</label></div>
+                <div class="proje-kart">
+                    <span class="proje-etiket">CSS Position</span>
+                    <h3>Lab 5 — Duyuru Kartı</h3>
+                    <p>Position: fixed, absolute, relative ve z-index kavramlarını gösteren interaktif etkinlik duyurusu kartı.</p>
+                    <a href="lab-position.html">🔗 Uygulamayı Aç</a>
+                </div>
+
+                <div class="proje-kart">
+                    <span class="proje-etiket">JavaScript</span>
+                    <h3>Not Hesaplama</h3>
+                    <p>Vize ve final notlarına göre ağırlıklı ortalama, harf notu ve başarı durumu hesaplayan JavaScript uygulaması.</p>
+                    <a href="uygulama1.html">🔗 Uygulamayı Aç</a>
+                </div>
+
+                <div class="proje-kart">
+                    <span class="proje-etiket">JavaScript</span>
+                    <h3>Birim Dönüştürücü</h3>
+                    <p>Sıcaklık, uzunluk ve kütle birimlerini birbirine dönüştüren iki kartlı interaktif hesaplama arayüzü.</p>
+                    <a href="uygulama2.html">🔗 Uygulamayı Aç</a>
+                </div>
+
+                <div class="proje-kart">
+                    <span class="proje-etiket">Bootstrap + JS</span>
+                    <h3>Lab 7 — Etkinlik Kayıt</h3>
+                    <p>Bootstrap CDN, tema değiştirme ve form özeti üretimi özelliklerini içeren etkinlik kayıt sayfası.</p>
+                    <a href="hafta7.html">🔗 Uygulamayı Aç</a>
+                </div>
             </div>
 
-            <label class="d-block mb-1" style="font-size:0.85rem; font-weight:700;">İlgi Alanları</label>
-            <div class="bg-light border rounded p-3 mb-3">
-                <div class="form-check"><input class="form-check-input" type="checkbox"><label class="form-check-label">HTML/CSS</label></div>
-                <div class="form-check"><input class="form-check-input" type="checkbox"><label class="form-check-label">Veri Bilimi</label></div>
-                <div class="form-check"><input class="form-check-input" type="checkbox"><label class="form-check-label">Yapay Zeka</label></div>
-            </div>
-
-            <label class="d-block mb-1" style="font-size:0.85rem; font-weight:700;">Konu</label>
-            <select id="konu" class="form-select mb-3">
-                <option value="">Seçiniz...</option>
-                <option>İş Teklifi</option>
-                <option>Akademik Soru</option>
-                <option>Genel Mesaj</option>
-            </select>
-
-            <label class="d-block mb-1" style="font-size:0.85rem; font-weight:700;">Mesajınız</label>
-            <textarea id="mesaj" class="form-control mb-4" rows="4" placeholder="Mesajınızı buraya yazın..."></textarea>
-
-            <div class="d-flex gap-3">
-                <button class="btn btn-primary fw-bold flex-grow-1">Mesajı Gönder</button>
-                <button class="btn btn-outline-danger" onclick="temizle(); return false;">Temizle</button>
-            </div>
+            <footer>
+                &copy; 2026 Merve Sueda Aydın | Mühendislik Portfolyosu
+            </footer>
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- ══ LABORATUVAR ══ -->
+    <div class="panel" id="lab-panel">
+        <div class="sayfa">
+            <h2 style="font-size:1.4rem; margin-bottom:8px;">🧪 Laboratuvar Çalışmaları</h2>
+            <p style="color:#64748b; font-size:0.95rem; margin-bottom:5px;">Web Programlama dersi laboratuvar uygulamalarına buradan ulaşabilirsiniz.</p>
+
+            <div class="lab-grid">
+                <a href="#" class="lab-kart" style="pointer-events:none; opacity:0.5;">
+                    <div class="lab-no">Hafta 1</div>
+                    <h3>GitHub Pages</h3>
+                    <p>GitHub repository oluşturma ve Pages ile yayınlama</p>
+                </a>
+
+                <a href="#" class="lab-kart" style="pointer-events:none; opacity:0.5;">
+                    <div class="lab-no">Hafta 2</div>
+                    <h3>HTML + CSS</h3>
+                    <p>Temel HTML yapısı ve CSS seçicileri</p>
+                </a>
+
+                <a href="#" class="lab-kart" style="pointer-events:none; opacity:0.5;">
+                    <div class="lab-no">Hafta 3</div>
+                    <h3>Form Yapıları</h3>
+                    <p>HTML form elemanları ve doğrulama</p>
+                </a>
+
+                <a href="flexbox.html" class="lab-kart">
+                    <div class="lab-no">Hafta 4</div>
+                    <h3>Flexbox Uygulaması</h3>
+                    <p>100vh tam sayfa, flex-direction: column düzeni</p>
+                </a>
+
+                <a href="lab-position.html" class="lab-kart">
+                    <div class="lab-no">Hafta 5</div>
+                    <h3>CSS Position Duyuru Kartı</h3>
+                    <p>Fixed, absolute, z-index ve animasyonlar</p>
+                </a>
+
+                <div class="lab-kart" style="cursor:default;">
+                    <div class="lab-no">Hafta 6 — JavaScript</div>
+                    <h3>JS Uygulamaları</h3>
+                    <p style="margin-bottom:10px;">İki ayrı JavaScript uygulaması:</p>
+                    <a href="uygulama1.html" style="display:block; color: #2563eb; font-weight:600; font-size:0.85rem; margin-bottom:6px; text-decoration:none;">📊 Not Hesaplama →</a>
+                    <a href="uygulama2.html" style="display:block; color: #2563eb; font-weight:600; font-size:0.85rem; text-decoration:none;">🔄 Birim Dönüştürücü →</a>
+                </div>
+
+                <a href="hafta7.html" class="lab-kart vurgulu">
+                    <div class="lab-no">⭐ Hafta 7 — Yeni!</div>
+                    <h3>Bootstrap + JavaScript</h3>
+                    <p>Etkinlik kayıt sayfası, tema değiştirme, form özeti</p>
+                </a>
+            </div>
+
+            <footer>
+                &copy; 2026 Merve Sueda Aydın | Mühendislik Portfolyosu
+            </footer>
+        </div>
+    </div>
+
+    <!-- ══ İLETİŞİM ══ -->
+    <div class="panel" id="iletisim-panel">
+        <div class="sayfa iletisim-panel">
+            <h1 class="iletisim-baslik">Bana Ulaşın</h1>
+            <div class="contact-container">
+                <label for="ad">Ad Soyad</label>
+                <input type="text" id="ad" placeholder="Adınız ve Soyadınız">
+
+                <label for="eposta">E-posta Adresi</label>
+                <input type="email" id="eposta" placeholder="ornek@mail.com">
+
+                <label for="sifre">Başvuru Takip Şifresi</label>
+                <input type="password" id="sifre" placeholder="Şifre belirleyin">
+
+                <label>İletişim Tercihi</label>
+                <div class="grup-kutu">
+                    <label><input type="radio" name="tercih" checked> E-posta</label>
+                    <label><input type="radio" name="tercih"> Telefon</label>
+                </div>
+
+                <label>İlgi Alanları</label>
+                <div class="grup-kutu">
+                    <label><input type="checkbox"> HTML/CSS</label>
+                    <label><input type="checkbox"> Veri Bilimi</label>
+                    <label><input type="checkbox"> Yapay Zeka</label>
+                </div>
+
+                <label for="konu">Konu</label>
+                <select id="konu">
+                    <option value="">Seçiniz...</option>
+                    <option>İş Teklifi</option>
+                    <option>Akademik Soru</option>
+                    <option>Genel Mesaj</option>
+                </select>
+
+                <label for="dosya">CV Yükle</label>
+                <input type="file" id="dosya">
+
+                <label for="mesaj">Mesajınız</label>
+                <textarea id="mesaj" placeholder="Mesajınızı buraya yazın..." rows="5"></textarea>
+
+                <div class="btn-row">
+                    <button class="btn-gonder">Mesajı Gönder</button>
+                    <button class="btn-temizle" onclick="temizle(); return false;">Temizle</button>
+                </div>
+            </div>
+
+            <footer>
+                &copy; 2026 Merve Sueda Aydın | Mühendislik Portfolyosu
+            </footer>
+        </div>
+    </div>
+
     <script>
+        const paneller = ['ana', 'hakkimda', 'projeler', 'lab', 'iletisim'];
+
         function goster(panel) {
-            document.getElementById('ana-panel').style.display = panel === 'ana' ? 'block' : 'none';
-            document.getElementById('iletisim-panel').style.display = panel === 'iletisim' ? 'block' : 'none';
-            document.getElementById('nav-ana').classList.toggle('active', panel === 'ana');
-            document.getElementById('nav-iletisim').classList.toggle('active', panel === 'iletisim');
+            paneller.forEach(p => {
+                document.getElementById(p + '-panel').classList.remove('aktif-panel');
+                const nav = document.getElementById('nav-' + p);
+                if (nav) nav.classList.remove('aktif');
+            });
+            document.getElementById(panel + '-panel').classList.add('aktif-panel');
+            const navEl = document.getElementById('nav-' + panel);
+            if (navEl) navEl.classList.add('aktif');
+            window.scrollTo(0, 0);
         }
+
         function temizle() {
-            document.querySelectorAll('input, select, textarea').forEach(el => {
+            document.querySelectorAll('#iletisim-panel input, #iletisim-panel select, #iletisim-panel textarea').forEach(el => {
                 if (el.type === 'radio' || el.type === 'checkbox') el.checked = false;
                 else el.value = '';
             });
