@@ -20,30 +20,60 @@ temaButonu.addEventListener("click", () => {
     }
 });
 
-// ----  BAŞVURU FORMU ----
-const basvuruFormu  = document.getElementById('basvuru-formu');
-const sonucAlani    = document.getElementById('sonuc-alani');
-const uyariAlani    = document.getElementById('uyari-alani');
-const formTemizle   = document.getElementById('form-temizle');
+// ---- BAŞVURU FORMU  ----
+const form = document.getElementById("basvuruForm");
+const sonuc = document.getElementById("sonucAlani");
+const uyari = document.getElementById("uyariAlani");
 
-basvuruFormu.addEventListener('submit', function (event) {
-    event.preventDefault(); // Sayfa yenilenmesini engelle
+form.addEventListener("submit", function (e) {
+    e.preventDefault();
 
-    const adSoyad     = document.getElementById('f-adsoyad').value.trim();
-    const eposta      = document.getElementById('f-eposta').value.trim();
-    const bolum       = document.getElementById('f-bolum').value.trim();
-    const sinif       = document.getElementById('f-sinif').value;
-    const oturum      = document.getElementById('f-oturum').value;
-    const katilimTuru = document.getElementById('f-katilim').value;
-    const mesaj       = document.getElementById('f-mesaj').value.trim();
-    const onay        = document.getElementById('f-onay').checked;
+    const ad = document.getElementById("adsoyad").value.trim();
+    const mail = document.getElementById("eposta").value.trim();
+    const bolum = document.getElementById("bolum").value.trim();
+    const sinif = document.getElementById("sinif").value;
+    const oturum = document.getElementById("oturum").value;
+    const katilim = document.getElementById("katilim").value;
+    const mesaj = document.getElementById("mesaj").value.trim();
+    const onay = document.getElementById("onay").checked;
 
-    // Eksik alan kontrolü
-    if (!adSoyad || !eposta || !bolum || !sinif || !oturum || !katilimTuru || !onay) {
-        uyariAlani.classList.remove('d-none');
-        uyariAlani.textContent = '⚠️ Lütfen tüm zorunlu alanları doldurun ve onay kutusunu işaretleyin.';
+    if (!ad || !mail || !bolum || !sinif || !onay) {
+        uyari.classList.remove("d-none");
         return;
     }
+
+    uyari.classList.add("d-none");
+
+    sonuc.className = "alert alert-success";
+
+    sonuc.innerHTML = `
+        <div class="card border-0 shadow-sm">
+            <div class="card-body">
+                <h5 class="fw-bold mb-3">✅ Başvuru Özeti</h5>
+
+                <div class="row mb-2">
+                    <div class="col-5 text-secondary">Ad Soyad</div>
+                    <div class="col-7 fw-semibold">${ad}</div>
+                </div>
+
+                <div class="row mb-2">
+                    <div class="col-5 text-secondary">E-posta</div>
+                    <div class="col-7 fw-semibold">${mail}</div>
+                </div>
+
+                <div class="row mb-2">
+                    <div class="col-5 text-secondary">Bölüm</div>
+                    <div class="col-7 fw-semibold">${bolum}</div>
+                </div>
+
+                <div class="row mb-2">
+                    <div class="col-5 text-secondary">Sınıf</div>
+                    <div class="col-7 fw-semibold">${sinif}</div>
+                </div>
+            </div>
+        </div>
+    `;
+});
 
     // Uyarıyı gizle
     uyariAlani.classList.add('d-none');
