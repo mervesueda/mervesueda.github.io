@@ -5,20 +5,20 @@
 // ============================================================
 
 // ----  TEMA DEĞİŞTİRME ----
-const temaButonu = document.getElementById('tema-butonu');
+const temaButonu = document.getElementById('temaButonu');
 let koyuTema = false;
 
-temaButonu.addEventListener('click', function () {
-    koyuTema = !koyuTema;
-    document.body.classList.toggle('koyu-tema', koyuTema);
+temaButonu.addEventListener("click", () => {
+    const mevcutTema = document.body.getAttribute("data-bs-theme");
 
-    if (koyuTema) {
-        temaButonu.textContent = '☀️ Açık Temaya Geç';
+    if (mevcutTema === "dark") {
+        document.body.setAttribute("data-bs-theme", "light");
+        temaButonu.textContent = "🌙 Koyu Temaya Geç";
     } else {
-        temaButonu.textContent = '🌙 Koyu Temaya Geç';
+        document.body.setAttribute("data-bs-theme", "dark");
+        temaButonu.textContent = "☀️ Açık Temaya Geç";
     }
 });
-
 
 // ----  BAŞVURU FORMU ----
 const basvuruFormu  = document.getElementById('basvuru-formu');
