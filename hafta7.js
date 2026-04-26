@@ -1,33 +1,31 @@
-// ============================================================
-// hafta7.js — Bootstrap + JavaScript Laboratuvar Uygulaması
-// Etkileşim 1: Tema değiştirme (classList.toggle)
-// Etkileşim 2: Form verilerinden başvuru özeti oluşturma
-// ============================================================
-
-// ----  TEMA DEĞİŞTİRME ----
+// ---- TEMA DEĞİŞTİRME ----
 const temaButonu = document.getElementById('temaButonu');
-let koyuTema = false;
 
 temaButonu.addEventListener("click", () => {
+    // Bootstrap 5.3+ için döküman düzeyinde tema kontrolü
     const mevcutTema = document.body.getAttribute("data-bs-theme");
 
     if (mevcutTema === "dark") {
         document.body.setAttribute("data-bs-theme", "light");
+        document.body.classList.remove("koyu-tema"); // CSS'teki özel sınıflar için
         temaButonu.textContent = "🌙 Koyu Temaya Geç";
     } else {
         document.body.setAttribute("data-bs-theme", "dark");
+        document.body.classList.add("koyu-tema"); // CSS'teki özel sınıflar için
         temaButonu.textContent = "☀️ Açık Temaya Geç";
     }
 });
 
-// ---- BAŞVURU FORMU  ----
+// ---- BAŞVURU FORMU ----
 const form = document.getElementById("basvuruForm");
-const sonuc = document.getElementById("sonucAlani");
-const uyari = document.getElementById("uyariAlani");
+const sonucAlani = document.getElementById("sonucAlani");
+const uyariAlani = document.getElementById("uyariAlani");
+const formTemizle = document.getElementById("formTemizle");
 
 form.addEventListener("submit", function (e) {
     e.preventDefault();
 
+    // Form değerlerini alma
     const ad = document.getElementById("adsoyad").value.trim();
     const mail = document.getElementById("eposta").value.trim();
     const bolum = document.getElementById("bolum").value.trim();
@@ -37,94 +35,52 @@ form.addEventListener("submit", function (e) {
     const mesaj = document.getElementById("mesaj").value.trim();
     const onay = document.getElementById("onay").checked;
 
+    // Doğrulama: Zorunlu alanlar ve onay kutusu
     if (!ad || !mail || !bolum || !sinif || !onay) {
-        uyari.classList.remove("d-none");
+        uyariAlani.classList.remove("d-none");
+        sonucAlani.classList.add("d-none"); // Hata varken eski özeti gizle
         return;
     }
 
-    uyari.classList.add("d-none");
-
-    sonuc.className = "alert alert-success";
-
-    sonuc.innerHTML = `
-        <div class="card border-0 shadow-sm">
-            <div class="card-body">
-                <h5 class="fw-bold mb-3">✅ Başvuru Özeti</h5>
-
-                <div class="row mb-2">
-                    <div class="col-5 text-secondary">Ad Soyad</div>
-                    <div class="col-7 fw-semibold">${ad}</div>
-                </div>
-
-                <div class="row mb-2">
-                    <div class="col-5 text-secondary">E-posta</div>
-                    <div class="col-7 fw-semibold">${mail}</div>
-                </div>
-
-                <div class="row mb-2">
-                    <div class="col-5 text-secondary">Bölüm</div>
-                    <div class="col-7 fw-semibold">${bolum}</div>
-                </div>
-
-                <div class="row mb-2">
-                    <div class="col-5 text-secondary">Sınıf</div>
-                    <div class="col-7 fw-semibold">${sinif}</div>
-                </div>
-            </div>
-        </div>
-    `;
-});
-
-    // Uyarıyı gizle
-    uyariAlani.classList.add('d-none');
-
-    const oturumAdlari = {
-        'bootstrap': 'Bootstrap + JS Projesi',
-        'html-css':  'HTML + CSS Temelleri',
-        'javascript':'JavaScript Uygulamaları',
-        'github':    'GitHub Pages Yayını'
-    };
-    const katilimAdlari = {
-        'yuzyuze': 'Yüz yüze',
-        'online':  'Online (canlı)',
-        'kayit':   'Kayıttan izleme'
-    };
-    const sinifAdlari = { '1':'1. Sınıf', '2':'2. Sınıf', '3':'3. Sınıf', '4':'4. Sınıf' };
+    // Başarılı durumda uyarıyı gizle ve sonucu göster
+    uyariAlani.classList.add("d-none");
+    sonucAlani.classList.remove("d-none");
+    sonucAlani.className = "alert alert-success ozet-kart fade-in";
 
     const tarih = new Date().toLocaleDateString('tr-TR', { day:'2-digit', month:'long', year:'numeric' });
 
-    // Sonuç alanını güncelle
-    sonucAlani.className = 'alert alert-success fade-in';
+    // Özet içeriğini oluşturma
     sonucAlani.innerHTML = `
         <div class="d-flex justify-content-between align-items-center mb-3">
-            <strong>✅ Başvuru Özeti Oluşturuldu</strong>
+            <h5 class="fw-bold mb-0">✅ Başvuru Özeti Oluşturuldu</h5>
             <small class="text-muted">${tarih}</small>
         </div>
-        <div class="card border-0 bg-white shadow-sm">
+        <div class="card border-0 bg-white text-dark shadow-sm">
             <div class="card-body p-3">
-                <div class="d-flex justify-content-between py-2 border-bottom">
-                    <span class="text-muted">Ad Soyad</span>
-                    <strong>${adSoyad}</strong>
+                <div class="ozet-satir">
+                    <span class="etiket">Ad Soyad:</span>
+                    <span class="deger">${ad}</span>
                 </div>
-                <div class="d-flex justify-content-between py-2 border-bottom">
-                    <span class="text-muted">E-posta</span>
-                    <strong>${eposta}</strong>
+                <div class="ozet-satir">
+                    <span class="etiket">E-posta:</span>
+                    <span class="deger">${mail}</span>
                 </div>
-                <div class="d-flex justify-content-between py-2 border-bottom">
-                    <span class="text-muted">Bölüm / Sınıf</span>
-                    <strong>${bolum} — ${sinifAdlari[sinif] || sinif}</strong>
+                <div class="ozet-satir">
+                    <span class="etiket">Bölüm / Sınıf:</span>
+                    <span class="deger">${bolum} — ${sinif}</span>
                 </div>
-                <div class="d-flex justify-content-between py-2 border-bottom">
-                    <span class="text-muted">Oturum</span>
-                    <strong>${oturumAdlari[oturum] || oturum}</strong>
+                <div class="ozet-satir">
+                    <span class="etiket">Oturum:</span>
+                    <span class="deger">${oturum || 'Belirtilmedi'}</span>
                 </div>
-                <div class="d-flex justify-content-between py-2 ${mesaj ? 'border-bottom' : ''}">
-                    <span class="text-muted">Katılım Türü</span>
-                    <strong>${katilimAdlari[katilimTuru] || katilimTuru}</strong>
+                <div class="ozet-satir">
+                    <span class="etiket">Katılım Türü:</span>
+                    <span class="deger">${katilim || 'Belirtilmedi'}</span>
                 </div>
-                ${mesaj ? `<div class="d-flex justify-content-between py-2">
-                    <span class="text-muted">Mesaj</span>
-                    <span class="text-end" style="max-width:60%;">${mesaj}</span>
+                ${mesaj ? `
+                <div class="mt-2 pt-2 border-top">
+                    <span class="etiket d-block mb-1">Mesaj:</span>
+                    <p class="small mb-0 text-dark">${mesaj}</p>
                 </div>` : ''}
             </div>
         </div>
@@ -133,11 +89,11 @@ form.addEventListener("submit", function (e) {
     sonucAlani.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 });
 
-
-// ----  FORMU TEMİZLE ----
+// ---- FORMU TEMİZLE ----
 formTemizle.addEventListener('click', function () {
-    basvuruFormu.reset();
+    form.reset();
     uyariAlani.classList.add('d-none');
-    sonucAlani.className = 'alert alert-info fade-in';
-    sonucAlani.innerHTML = '<span class="text-muted" style="font-size:0.88rem;">Henüz başvuru özeti oluşturulmadı. Formu doldurduktan sonra sonuç burada görünecek.</span>';
+    sonucAlani.classList.remove("d-none");
+    sonucAlani.className = 'alert alert-info rounded-4';
+    sonucAlani.innerHTML = 'Henüz başvuru özeti oluşturulmadı. Formu doldurduktan sonra sonuç burada görünecek.';
 });
