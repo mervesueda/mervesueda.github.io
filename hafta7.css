@@ -1,0 +1,357 @@
+/* ============================================================
+   hafta7.css — Hafta 7 Bootstrap + JavaScript Uygulaması
+   Özel stiller (Bootstrap üzerine ek düzenlemeler)
+============================================================ */
+
+:root {
+    --primary: #2563eb;
+    --primary-hover: #1d4ed8;
+    --accent: #06b6d4;
+    --text-ana: #1e293b;
+    --text-ikincil: #64748b;
+    --border: #e2e8f0;
+}
+
+/* ---- Tema Geçişi ---- */
+body {
+    transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+body.koyu-tema {
+    background-color: #0f172a !important;
+    color: #e2e8f0 !important;
+}
+
+body.koyu-tema .navbar {
+    background-color: #1e293b !important;
+    border-bottom: 1px solid #334155 !important;
+}
+
+body.koyu-tema .navbar-brand,
+body.koyu-tema .nav-link {
+    color: #e2e8f0 !important;
+}
+
+body.koyu-tema .nav-link:hover {
+    color: #60a5fa !important;
+}
+
+body.koyu-tema .card {
+    background-color: #1e293b !important;
+    border-color: #334155 !important;
+    color: #e2e8f0 !important;
+}
+
+body.koyu-tema .card-text,
+body.koyu-tema .text-muted {
+    color: #94a3b8 !important;
+}
+
+body.koyu-tema .bg-light {
+    background-color: #1e293b !important;
+}
+
+body.koyu-tema .bilgi-bolumu {
+    background-color: #1e293b !important;
+    border-color: #334155 !important;
+}
+
+body.koyu-tema .form-control,
+body.koyu-tema .form-select {
+    background-color: #0f172a !important;
+    border-color: #334155 !important;
+    color: #e2e8f0 !important;
+}
+
+body.koyu-tema .form-control::placeholder {
+    color: #64748b !important;
+}
+
+body.koyu-tema footer {
+    background-color: #020617 !important;
+}
+
+body.koyu-tema #sonuc-alani {
+    background-color: #1e293b !important;
+    border-color: #334155 !important;
+    color: #e2e8f0 !important;
+}
+
+/* ---- Hero Bölümü ---- */
+.hero-bolumu {
+    background: linear-gradient(135deg, #1e3a8a 0%, #1d4ed8 40%, #0891b2 100%);
+    padding: 80px 0 70px;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-bolumu::before {
+    content: '';
+    position: absolute;
+    top: -50px;
+    right: -50px;
+    width: 300px;
+    height: 300px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 50%;
+}
+
+.hero-bolumu::after {
+    content: '';
+    position: absolute;
+    bottom: -80px;
+    left: 10%;
+    width: 200px;
+    height: 200px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 50%;
+}
+
+.hero-etiket {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    color: #bfdbfe;
+    padding: 5px 14px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    margin-bottom: 18px;
+    border: 1px solid rgba(255,255,255,0.2);
+}
+
+.hero-bolumu h1 {
+    font-size: 2.6rem;
+    font-weight: 800;
+    line-height: 1.15;
+    margin-bottom: 18px;
+}
+
+.hero-bolumu .lead {
+    font-size: 1rem;
+    opacity: 0.85;
+    max-width: 500px;
+}
+
+.hero-bilgi-kutu {
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 16px;
+    padding: 28px;
+}
+
+.hero-bilgi-kutu h5 {
+    font-weight: 700;
+    margin-bottom: 16px;
+    font-size: 1rem;
+}
+
+.tech-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    margin: 3px;
+}
+
+.hero-bilgi-kutu ul {
+    padding-left: 0;
+    list-style: none;
+    margin-top: 14px;
+}
+
+.hero-bilgi-kutu ul li {
+    padding: 7px 0;
+    font-size: 0.88rem;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.hero-bilgi-kutu ul li:last-child {
+    border-bottom: none;
+}
+
+/* ---- Kart Bölümü ---- */
+.kart-bolumu .card {
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%;
+}
+
+.kart-bolumu .card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1) !important;
+}
+
+.kart-no {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    font-weight: 800;
+    margin-bottom: 14px;
+}
+
+/* ---- Bilgi Bölümü ---- */
+.bilgi-bolumu {
+    background: #f8fafc;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 32px;
+    transition: background-color 0.4s ease, border-color 0.4s ease;
+}
+
+.bilgi-satir {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.9rem;
+}
+
+.bilgi-satir:last-child {
+    border-bottom: none;
+}
+
+.bilgi-satir .etiket {
+    color: var(--text-ikincil);
+    font-weight: 500;
+}
+
+/* ---- Neden Katılmalısınız Kutuları ---- */
+.neden-kutu {
+    background: #eff6ff;
+    border: 1px solid #bfdbfe;
+    border-radius: 12px;
+    padding: 18px;
+    height: 100%;
+    transition: transform 0.2s ease;
+}
+
+.neden-kutu:hover {
+    transform: translateY(-3px);
+}
+
+.neden-kutu h6 {
+    font-weight: 700;
+    color: #1e3a8a;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+}
+
+.neden-kutu p {
+    font-size: 0.83rem;
+    color: #3b82f6;
+    margin: 0;
+}
+
+body.koyu-tema .neden-kutu {
+    background: #1e3a8a20 !important;
+    border-color: #1e40af40 !important;
+}
+
+body.koyu-tema .neden-kutu h6 {
+    color: #93c5fd !important;
+}
+
+body.koyu-tema .neden-kutu p {
+    color: #60a5fa !important;
+}
+
+/* ---- Form Bölümü ---- */
+.form-bolumu .card {
+    border-radius: 16px;
+}
+
+.form-bolumu .form-control,
+.form-bolumu .form-select {
+    border-radius: 10px;
+    border: 2px solid var(--border);
+    padding: 10px 14px;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.form-bolumu .form-control:focus,
+.form-bolumu .form-select:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+}
+
+/* ---- Sonuç Alanı ---- */
+#sonuc-alani {
+    background: #f0f9ff;
+    border: 1px solid #bae6fd;
+    border-radius: 12px;
+    padding: 20px 24px;
+    font-size: 0.9rem;
+    color: #0c4a6e;
+    transition: all 0.4s ease;
+    animation: fadeInUp 0.4s ease;
+}
+
+#sonuc-alani.sonuc-var {
+    background: #f0fdf4;
+    border-color: #bbf7d0;
+    color: #14532d;
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ---- Özet Kart ---- */
+.ozet-kart {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    margin-top: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.ozet-satir {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 0;
+    border-bottom: 1px dashed #e2e8f0;
+    font-size: 0.88rem;
+}
+
+.ozet-satir:last-child { border-bottom: none; }
+.ozet-satir .key { color: var(--text-ikincil); }
+.ozet-satir .val { font-weight: 700; color: var(--text-ana); }
+
+/* ---- Uyarı Alert ---- */
+#uyari-alani {
+    display: none;
+    animation: fadeInUp 0.3s ease;
+}
+
+/* ---- Footer ---- */
+footer {
+    background: #0f172a !important;
+    transition: background-color 0.4s ease;
+}
+
+/* ---- Navbar ---- */
+.navbar-brand {
+    font-weight: 800;
+    letter-spacing: -0.5px;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 768px) {
+    .hero-bolumu h1 { font-size: 1.8rem; }
+    .hero-bolumu { padding: 50px 0 40px; }
+}
