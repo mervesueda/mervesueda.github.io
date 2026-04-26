@@ -1,24 +1,131 @@
-/* ---- Tema Geçiş Animasyonu ---- */
-body { transition: background-color 0.4s ease, color 0.4s ease; }
+/* ════════════════════════════════════
+   HAFTA 7 — Ek CSS (Bootstrap üstüne minimal ekleme)
+   Ana görünüm Bootstrap üzerinden kurulmuştur.
+════════════════════════════════════ */
 
-/* ---- Koyu Tema Overrides ---- */
-body.koyu-tema { background-color: #0f172a !important; color: #e2e8f0 !important; }
-body.koyu-tema .navbar { background-color: #020617 !important; }
-body.koyu-tema .card { background-color: #1e293b !important; border-color: #334155 !important; color: #e2e8f0 !important; }
-body.koyu-tema .card .text-muted { color: #94a3b8 !important; }
-body.koyu-tema .bg-light { background-color: #1e293b !important; }
-body.koyu-tema .form-control, body.koyu-tema .form-select { background-color: #0f172a !important; border-color: #475569 !important; color: #e2e8f0 !important; }
-body.koyu-tema .form-label { color: #cbd5e1 !important; }
-body.koyu-tema #sonuc-alani { background-color: #1e293b !important; border-color: #334155 !important; color: #e2e8f0 !important; }
-body.koyu-tema .bilgi-panel { background-color: #1e293b !important; border-color: #334155 !important; }
+/* Hero Bölümü */
+.hero-section {
+    background: linear-gradient(135deg, #f8fafc 0%, #eff6ff 100%);
+    border-bottom: 1px solid #e2e8f0;
+    min-height: 420px;
+    display: flex;
+    align-items: center;
+}
 
-/* ---- Hero gradient ---- */
-.hero-bg { background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 60%, #0c4a6e 100%); }
+/* Koyu Tema */
+body.koyu-tema {
+    background-color: #0f172a !important;
+    color: #e2e8f0 !important;
+}
 
-/* ---- Kart hover ---- */
-.card-hover { transition: transform 0.25s ease, box-shadow 0.25s ease; }
-.card-hover:hover { transform: translateY(-5px); box-shadow: 0 1rem 2rem rgba(0,0,0,0.12) !important; }
+body.koyu-tema .hero-section {
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%) !important;
+}
 
-/* ---- Fade animasyonu ---- */
-@keyframes fadeInUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-.fade-in { animation: fadeInUp 0.35s ease; }
+body.koyu-tema .card,
+body.koyu-tema .info-card {
+    background-color: #1e293b !important;
+    border-color: #334155 !important;
+    color: #e2e8f0 !important;
+}
+
+body.koyu-tema .card-title,
+body.koyu-tema h1, body.koyu-tema h2,
+body.koyu-tema h3, body.koyu-tema h4,
+body.koyu-tema h5, body.koyu-tema h6 {
+    color: #f1f5f9 !important;
+}
+
+body.koyu-tema .text-secondary {
+    color: #94a3b8 !important;
+}
+
+body.koyu-tema .bg-light {
+    background-color: #1e293b !important;
+}
+
+body.koyu-tema .list-group-item {
+    background-color: #1e293b !important;
+    border-color: #334155 !important;
+    color: #e2e8f0 !important;
+}
+
+body.koyu-tema .form-control,
+body.koyu-tema .form-select {
+    background-color: #334155 !important;
+    border-color: #475569 !important;
+    color: #e2e8f0 !important;
+}
+
+body.koyu-tema .form-control::placeholder {
+    color: #64748b !important;
+}
+
+body.koyu-tema .form-check-label {
+    color: #cbd5e1 !important;
+}
+
+body.koyu-tema footer.footer-alan {
+    background-color: #0f172a !important;
+    border-top: 1px solid #1e293b;
+}
+
+body.koyu-tema .btn-outline-secondary {
+    color: #94a3b8 !important;
+    border-color: #475569 !important;
+}
+
+body.koyu-tema .alert-info {
+    background-color: #1e3a5f !important;
+    border-color: #2563eb !important;
+    color: #bfdbfe !important;
+}
+
+/* Koyu renkli arka plan kutuları koyu temada */
+body.koyu-tema [style*="background:#eff6ff"],
+body.koyu-tema [style*="background:#f0fdf4"],
+body.koyu-tema [style*="background:#fffbeb"],
+body.koyu-tema [style*="background:#f5f3ff"] {
+    background: #1e293b !important;
+}
+
+/* Footer */
+footer.footer-alan {
+    background-color: #f8fafc;
+    border-top: 1px solid #e2e8f0;
+}
+
+/* Sonuç Özet Kartı */
+.ozet-kart {
+    background: linear-gradient(135deg, #eff6ff, #f0fdf4);
+    border: 1px solid #bfdbfe;
+    border-radius: 16px;
+    padding: 24px;
+    animation: fadeUp 0.5s ease;
+}
+
+body.koyu-tema .ozet-kart {
+    background: linear-gradient(135deg, #1e293b, #0f2e1e) !important;
+    border-color: #2563eb !important;
+}
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(15px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.ozet-satir {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+    font-size: 0.92rem;
+}
+
+.ozet-satir:last-child { border-bottom: none; }
+
+.ozet-satir .etiket { color: #64748b; }
+.ozet-satir .deger  { font-weight: 700; color: #1e293b; }
+
+body.koyu-tema .ozet-satir .etiket { color: #94a3b8; }
+body.koyu-tema .ozet-satir .deger  { color: #f1f5f9; }
