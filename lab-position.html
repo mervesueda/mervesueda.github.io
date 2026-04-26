@@ -5,9 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lab 5 — CSS Position Duyuru Kartı</title>
     <style>
-        /* ====================================================
-           RENK PALETİ
-        ==================================================== */
         :root {
             --kart-bg-1:          #c8c8f8;
             --kart-bg-2:          #d8d0f0;
@@ -23,6 +20,7 @@
             --beyaz:              #ffffff;
             --metin-koyu:         #1e1b4b;
             --arka:               #f1f0f9;
+            --nav-bg:             #0f172a;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -36,11 +34,46 @@
             align-items: center;
         }
 
-        /* ====================================================
-           BAŞLIK ALANI — kısa tanıtım
-        ==================================================== */
+        /* FIXED NAVBAR — siyah */
+        .fixed-navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 52px;
+            background: var(--nav-bg);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 24px;
+            z-index: 2000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.4);
+        }
+
+        .fixed-navbar .logo {
+            font-size: 14px;
+            font-weight: bold;
+            color: #fff;
+            font-family: Georgia, serif;
+        }
+
+        .fixed-navbar a {
+            color: #e2e8f0;
+            text-decoration: none;
+            font-size: 13px;
+            padding: 6px 14px;
+            border-radius: 5px;
+            transition: background 0.2s;
+            font-family: Georgia, serif;
+        }
+
+        .fixed-navbar a:hover {
+            background: rgba(255,255,255,0.1);
+            color: #fff;
+        }
+
         .sayfa-baslik {
-            margin-top: 90px;
+            margin-top: 72px;
             margin-bottom: 0;
             text-align: center;
             color: var(--metin-koyu);
@@ -50,9 +83,6 @@
             opacity: 0.75;
         }
 
-        /* ====================================================
-           ANA ALAN
-        ==================================================== */
         .ana-alan {
             width: 100%;
             max-width: 680px;
@@ -63,43 +93,9 @@
             gap: 28px;
         }
 
-        /* ====================================================
-           FIXED 1 — Sol üst "Ana Sayfaya Dön"
-           position: fixed — scroll'da sabit kalır
-        ==================================================== */
-        .fixed-geri {
-            position: fixed;        /* ← fixed */
-            top: 18px;
-            left: 18px;
-            z-index: 1000;
-            background: var(--vurgu);
-            color: var(--beyaz);
-            text-decoration: none;
-            padding: 10px 18px;
-            border-radius: 6px;
-            font-size: 13px;
-            font-family: Georgia, serif;
-            box-shadow: 0 2px 10px rgba(99,102,241,0.3);
-            /* CSS etkileşimi 1: transition */
-            transition: background 0.25s, transform 0.2s;
-            cursor: pointer;        /* ← hover cursor değişimi 1 */
-        }
-        .fixed-geri:hover {
-            background: var(--vurgu-koyu);
-            transform: translateY(-2px);
-        }
-        /* CSS etkileşimi 2: :active efekti */
-        .fixed-geri:active {
-            transform: translateY(1px);
-            background: #3730a3;
-        }
-
-        /* ====================================================
-           FIXED 2 — Sağ alt "Yardımcı Menü"
-           position: fixed — scroll'da sabit kalır
-        ==================================================== */
+        /* FIXED — Sağ alt Yardımcı Menü */
         .fixed-yardim {
-            position: fixed;        /* ← fixed */
+            position: fixed;
             bottom: 22px;
             right: 22px;
             z-index: 1000;
@@ -111,23 +107,16 @@
             font-family: Georgia, serif;
             box-shadow: 0 4px 18px rgba(99,102,241,0.35);
             transition: background 0.25s, transform 0.2s, box-shadow 0.25s;
-            cursor: pointer;        /* ← hover cursor değişimi 2 */
+            cursor: pointer;
         }
         .fixed-yardim:hover {
             background: var(--vurgu-koyu);
             transform: translateY(-3px);
             box-shadow: 0 8px 24px rgba(99,102,241,0.45);
         }
-        .fixed-yardim:active {
-            transform: translateY(0);
-        }
 
-        /* ====================================================
-           KART KAPSAYICI — position: relative (zorunlu)
-           absolute öğeler bu kapsayıcıya göre konumlanır
-        ==================================================== */
         .kart-kapsayici {
-            position: relative;     /* ← relative */
+            position: relative;
             width: 100%;
             min-height: 420px;
             background: linear-gradient(135deg,
@@ -137,47 +126,40 @@
             border-radius: 20px;
             padding: 52px 44px 56px;
             box-shadow: 0 8px 40px rgba(99,102,241,0.15);
-            /* CSS etkileşimi 1: transition (hover'da gölge değişir) */
             transition: box-shadow 0.35s;
-            /* CSS etkileşimi 3: @keyframes giriş animasyonu */
             animation: asagiGel 0.6s ease both;
         }
         .kart-kapsayici:hover {
             box-shadow: 0 16px 56px rgba(99,102,241,0.25);
         }
 
-        /* Dekoratif daire — z-index: 0 (en arkada) */
         .kart-kapsayici::before {
             content: '';
-            position: absolute;     /* ← absolute (pseudo-element) */
+            position: absolute;
             top: 55px;
             right: 55px;
             width: 210px;
             height: 210px;
             background: rgba(255,255,255,0.32);
             border-radius: 50%;
-            z-index: 0;             /* ← z-index: arkada */
+            z-index: 0;
         }
 
-        /* İkinci dekoratif daire — z-index: 0 (arkada, farklı boyut) */
         .kart-kapsayici::after {
             content: '';
-            position: absolute;     /* ← absolute (pseudo-element) */
+            position: absolute;
             bottom: 40px;
             right: 120px;
             width: 100px;
             height: 100px;
             background: rgba(255,255,255,0.18);
             border-radius: 50%;
-            z-index: 0;             /* ← z-index: arkada */
+            z-index: 0;
         }
 
-        /* ====================================================
-           KART İÇERİĞİ — z-index: 1 (dairelerin önünde)
-        ==================================================== */
         .kart-icerik {
             position: relative;
-            z-index: 1;             /* ← z-index: dairelerin önünde */
+            z-index: 1;
         }
 
         .kart-baslik {
@@ -195,15 +177,11 @@
             max-width: 370px;
         }
 
-        /* ====================================================
-           ABSOLUTE 1 — "Ücretsiz" rozeti (sol üst köşe)
-           position: absolute — kart kapsayıcıya göre konumlu
-        ==================================================== */
         .rozet-ucretsiz {
-            position: absolute;     /* ← absolute 1 */
+            position: absolute;
             top: 18px;
             left: 24px;
-            z-index: 3;             /* ← z-index: rozetler öndedir */
+            z-index: 3;
             background: var(--rozet-sari);
             color: var(--rozet-sari-metin);
             font-size: 12px;
@@ -213,7 +191,7 @@
             font-weight: bold;
             box-shadow: 0 2px 8px rgba(0,0,0,0.08);
             transition: transform 0.2s, box-shadow 0.2s;
-            cursor: pointer;        /* ← hover cursor değişimi 3 */
+            cursor: pointer;
             animation: asagiGel 0.7s 0.1s ease both;
         }
         .rozet-ucretsiz:hover {
@@ -221,15 +199,11 @@
             box-shadow: 0 4px 14px rgba(0,0,0,0.14);
         }
 
-        /* ====================================================
-           ABSOLUTE 2 — "24 Nisan" tarih rozeti (sağ üst köşe)
-           position: absolute — kart kapsayıcıya göre konumlu
-        ==================================================== */
         .rozet-tarih {
-            position: absolute;     /* ← absolute 2 */
+            position: absolute;
             top: 18px;
             right: 24px;
-            z-index: 3;             /* ← z-index */
+            z-index: 3;
             background: var(--rozet-yesil);
             color: var(--rozet-yesil-metin);
             font-size: 12px;
@@ -239,7 +213,7 @@
             font-weight: bold;
             box-shadow: 0 2px 8px rgba(0,0,0,0.08);
             transition: transform 0.2s, box-shadow 0.2s;
-            cursor: pointer;        /* ← cursor değişimi */
+            cursor: pointer;
             animation: asagiGel 0.7s 0.2s ease both;
         }
         .rozet-tarih:hover {
@@ -247,16 +221,11 @@
             box-shadow: 0 4px 14px rgba(0,0,0,0.14);
         }
 
-        /* ====================================================
-           ABSOLUTE 3 — "Konum: Konferans Salonu" bilgi kutusu
-           position: absolute — kart kapsayıcıya göre konumlu
-           z-index: 2 ile dekoratif dairenin ÜSTünde durur
-        ==================================================== */
         .rozet-konum {
-            position: absolute;     /* ← absolute 3 */
+            position: absolute;
             top: 50%;
             right: 36px;
-            z-index: 2;             /* ← z-index: daire(0) ile rozet(3) arası */
+            z-index: 2;
             background: rgba(255,255,255,0.90);
             color: var(--metin-koyu);
             font-size: 13px;
@@ -265,7 +234,7 @@
             border-radius: 10px;
             box-shadow: 0 4px 18px rgba(99,102,241,0.14);
             transition: transform 0.25s, box-shadow 0.25s;
-            cursor: pointer;        /* ← cursor değişimi */
+            cursor: pointer;
             animation: asagiGel 0.7s 0.3s ease both;
         }
         .rozet-konum:hover {
@@ -273,15 +242,11 @@
             box-shadow: 0 10px 28px rgba(99,102,241,0.22);
         }
 
-        /* ====================================================
-           ABSOLUTE 4 — "Son Kayıt" uyarı rozeti (sağ alt)
-           position: absolute — nabız animasyonu ile dikkat çeker
-        ==================================================== */
         .rozet-sonkayit {
-            position: absolute;     /* ← absolute 4 */
+            position: absolute;
             bottom: 22px;
             right: 24px;
-            z-index: 3;             /* ← z-index */
+            z-index: 3;
             background: var(--rozet-mavi);
             color: var(--rozet-mavi-metin);
             font-size: 12px;
@@ -289,34 +254,22 @@
             padding: 6px 14px;
             border-radius: 20px;
             font-weight: bold;
-            /* CSS etkileşimi 4: @keyframes nabız animasyonu */
             animation: nabiz 2s ease-in-out infinite;
             transition: transform 0.2s;
-            cursor: pointer;        /* ← cursor değişimi */
+            cursor: pointer;
         }
-        .rozet-sonkayit:hover {
-            transform: scale(1.12);
-        }
+        .rozet-sonkayit:hover { transform: scale(1.12); }
 
-        /* ====================================================
-           ANİMASYONLAR (CSS only — @keyframes)
-        ==================================================== */
-
-        /* Animasyon 1: Yukarıdan süzülerek gelme — sayfa yüklenişi */
         @keyframes asagiGel {
             from { opacity: 0; transform: translateY(-16px); }
             to   { opacity: 1; transform: translateY(0); }
         }
 
-        /* Animasyon 2: Nabız — Son Kayıt rozeti sürekli parlar */
         @keyframes nabiz {
             0%, 100% { box-shadow: 0 2px 6px rgba(99,102,241,0.12); }
             50%       { box-shadow: 0 2px 22px rgba(99,102,241,0.52); }
         }
 
-        /* ====================================================
-           FOOTER / ALT BİLGİ ALANI
-        ==================================================== */
         .footer-alan {
             font-size: 12.5px;
             color: #9ca3af;
@@ -327,39 +280,22 @@
 </head>
 <body>
 
-    <!-- ============================================================
-         FIXED 1 — Sol üst, scroll'da sabit kalır
-         Gerçek <a> etiketi → tek tıkla index.html'e döner
-    ============================================================ -->
-    <a class="fixed-geri" href="index.html">Ana Sayfaya Dön</a>
+    <!-- SİYAH NAVBAR (fixed) -->
+    <nav class="fixed-navbar">
+        <span class="logo">Merve Sueda Aydın</span>
+        <a href="index.html">← Ana Sayfaya Dön</a>
+    </nav>
 
-    <!-- ============================================================
-         FIXED 2 — Sağ alt, scroll'da sabit kalır
-         JS yok: CSS :hover ile görsel geri bildirim yeterli
-    ============================================================ -->
+    <!-- FIXED — Sağ alt -->
     <div class="fixed-yardim">Yardımcı Menü</div>
 
-    <!-- ============================================================
-         KISA BAŞLIK ALANI (yönerge gereği)
-    ============================================================ -->
     <p class="sayfa-baslik">Lab 5 — CSS Position Uygulaması</p>
 
-    <!-- Ana içerik -->
     <div class="ana-alan">
-
-        <!-- ============================================================
-             KART KAPSAYICI — position: relative
-             İçindeki tüm absolute öğeler buna göre konumlanır
-        ============================================================ -->
         <div class="kart-kapsayici">
-
-            <!-- ABSOLUTE 1: Ücretsiz rozeti — sol üst -->
             <div class="rozet-ucretsiz">Ücretsiz</div>
-
-            <!-- ABSOLUTE 2: Tarih rozeti — sağ üst -->
             <div class="rozet-tarih">24 Nisan</div>
 
-            <!-- Kart metin içeriği — z-index:1 ile dairenin önünde -->
             <div class="kart-icerik">
                 <h2 class="kart-baslik">Teknoloji Topluluğu Etkinliği</h2>
                 <p class="kart-aciklama">
@@ -370,17 +306,11 @@
                 </p>
             </div>
 
-            <!-- ABSOLUTE 3: Konum bilgisi — ortada sağ, z-index:2 -->
             <div class="rozet-konum">Konum: Konferans Salonu</div>
-
-            <!-- ABSOLUTE 4: Son kayıt — sağ alt, nabız animasyonu -->
             <div class="rozet-sonkayit">Son Kayıt</div>
-
         </div>
 
-        <!-- ALT BİLGİ / FOOTER (yönerge gereği) -->
         <div class="footer-alan">2026 — LAB Position Örnek Çalışması</div>
-
     </div>
 
 </body>
