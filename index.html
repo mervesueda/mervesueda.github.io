@@ -16,7 +16,7 @@
             --text-ana: #1e293b; 
             --text-ikincil: #64748b;
             --border: #e2e8f0;
-            --sol-kutu-bg: #fffbf2; /* Hafif sıcak ton korundu */
+            --sol-kutu-bg: #fffbf2;
             --sag-kutu-bg: #f8fafc;
             --danger: #e11d48;
         }
@@ -30,7 +30,6 @@
             line-height: 1.6;
         }
 
-        /* Navigasyon */
         nav {
             background: var(--kart-bg);
             border-bottom: 1px solid var(--border);
@@ -68,7 +67,6 @@
             color: #fff;
         }
 
-        /* Sayfa Konteyner */
         .sayfa {
             max-width: 900px;
             margin: 40px auto;
@@ -90,7 +88,6 @@
 
         .aciklama span { color: var(--primary); font-weight: 700; }
 
-        /* Sütun Yapısı */
         .sutunlar { display: flex; gap: 25px; }
 
         .icerik {
@@ -125,7 +122,6 @@
             text-align: justify;
         }
 
-        /* Sosyal Linkler */
         .sosyal-linkler { list-style: none; }
         .sosyal-linkler li { margin-bottom: 10px; }
         .sosyal-linkler a {
@@ -140,7 +136,6 @@
         }
         .sosyal-linkler a:hover { color: var(--accent); }
 
-        /* Proje Link Alanı */
         .lab-link-kutu {
             margin-top: 25px;
             padding-top: 20px;
@@ -192,6 +187,28 @@
             transform: translateY(-2px);
         }
 
+        /* Hafta 7 özel butonu */
+        .hafta7-btn {
+            display: block;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white !important;
+            text-decoration: none;
+            padding: 14px 20px !important;
+            border-radius: 10px !important;
+            font-size: 0.95rem !important;
+            font-weight: 700 !important;
+            border: none !important;
+            text-align: center;
+            transition: all 0.3s ease !important;
+            margin-top: 5px;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+        }
+        .hafta7-btn:hover {
+            transform: translateY(-3px) !important;
+            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.4) !important;
+            color: white !important;
+        }
+
         footer {
             text-align: center;
             font-size: 0.85rem;
@@ -201,7 +218,6 @@
             margin-top: 35px;
         }
 
-        /* İletişim Paneli Modernizasyon */
         .iletisim-panel { display: none; animation: fadeIn 0.5s ease; }
 
         @keyframes fadeIn {
@@ -330,6 +346,9 @@
                         <a href="uygulama1.html">📊 Not Hesaplama</a>
                         <a href="uygulama2.html">🔄 Birim Dönüştürücü</a>
                     </div>
+
+                    <p class="lab6-etiket">⚡ Hafta 7 Laboratuvarı</p>
+                    <a href="hafta7.html" class="hafta7-btn">🎯 Hafta 7 Uygulamasına Git</a>
                 </div>
             </section>
 
