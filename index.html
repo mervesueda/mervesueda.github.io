@@ -5,360 +5,142 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Merve Sueda Aydın - Portfolyo</title>
 
+    <!-- Bootstrap 5.3.3 CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
     <style>
-        /* Modern Tasarım Sistemi - Diğer Uygulamalarla Eşitlendi */
+        /* Sadece mevcut portfolyo kartı düzeni için — Bootstrap'la ifade edilemeyen min. ekler */
         :root {
-            --ana-bg: #f4f7fa;
-            --kart-bg: #ffffff;
-            --primary: #2563eb; 
-            --primary-hover: #1d4ed8;
-            --accent: #06b6d4; 
-            --text-ana: #1e293b; 
-            --text-ikincil: #64748b;
+            --primary: #2563eb;
+            --accent: #06b6d4;
             --border: #e2e8f0;
+            --text-ikincil: #64748b;
             --sol-kutu-bg: #fffbf2;
-            --sag-kutu-bg: #f8fafc;
-            --danger: #e11d48;
         }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background: var(--ana-bg);
-            color: var(--text-ana);
-            line-height: 1.6;
-        }
-
-        nav {
-            background: var(--kart-bg);
-            border-bottom: 1px solid var(--border);
-            padding: 1rem 2rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        nav .logo {
-            font-size: 1.2rem;
-            font-weight: 800;
-            color: var(--primary);
-            letter-spacing: -0.5px;
-        }
-
-        nav ul { list-style: none; display: flex; gap: 8px; }
-        nav ul li a {
-            text-decoration: none;
-            color: var(--text-ikincil);
-            font-size: 0.9rem;
-            font-weight: 500;
-            padding: 8px 16px;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-        }
-        
-        nav ul li a:hover,
-        nav ul li a.aktif {
-            background: var(--primary);
-            color: #fff;
-        }
+        body { background: #f4f7fa; }
 
         .sayfa {
             max-width: 900px;
             margin: 40px auto;
-            background: var(--kart-bg);
+            background: #fff;
             border: 1px solid var(--border);
             border-radius: 16px;
             padding: 40px;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05);
         }
-
-        .aciklama {
-            font-size: 1.1rem;
-            color: var(--text-ana);
-            margin-bottom: 30px;
-            padding-bottom: 25px;
-            border-bottom: 2px solid var(--ana-bg);
-            font-weight: 500;
-        }
-
-        .aciklama span { color: var(--primary); font-weight: 700; }
-
-        .sutunlar { display: flex; gap: 25px; }
-
-        .icerik {
-            flex: 1.2;
+        .icerik-kutu {
             background: var(--sol-kutu-bg);
             border: 1px solid #f2e3c0;
             border-radius: 12px;
             padding: 25px;
         }
-
-        aside {
-            flex: 1;
-            background: var(--sag-kutu-bg);
+        .bilgi-kutu {
+            background: #f8fafc;
             border: 1px solid var(--border);
             border-radius: 12px;
             padding: 25px;
         }
-
-        h2 { 
-            font-size: 1.1rem; 
-            color: var(--text-ana); 
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .icerik p, aside p {
-            font-size: 0.95rem;
-            color: var(--text-ikincil);
-            margin-bottom: 15px;
-            text-align: justify;
-        }
-
-        .sosyal-linkler { list-style: none; }
-        .sosyal-linkler li { margin-bottom: 10px; }
-        .sosyal-linkler a {
-            text-decoration: none;
-            font-size: 0.9rem;
-            color: var(--primary);
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: color 0.3s;
-        }
-        .sosyal-linkler a:hover { color: var(--accent); }
-
-        .lab-link-kutu {
-            margin-top: 25px;
-            padding-top: 20px;
-            border-top: 1px solid rgba(0,0,0,0.05);
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
+        .lab-link-kutu { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; padding-top: 20px; border-top: 1px solid #f0f0f0; }
         .lab-link-kutu a {
             display: block;
-            background: var(--kart-bg);
-            color: var(--text-ana);
+            background: #fff;
+            color: #1e293b;
             text-decoration: none;
-            padding: 12px 18px;
+            padding: 11px 16px;
             border-radius: 10px;
             font-size: 0.9rem;
             font-weight: 600;
             border: 1px solid var(--border);
-            transition: all 0.3s ease;
+            transition: all 0.25s ease;
         }
-        
-        .lab-link-kutu a:hover { 
-            border-color: var(--primary);
-            color: var(--primary);
-            transform: translateX(5px);
-        }
-
-        .lab6-etiket {
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--text-ikincil);
-            margin-top: 10px;
-            font-weight: 700;
-        }
-
-        .lab6-grup { display: flex; gap: 10px; }
-        .lab6-grup a { 
-            flex: 1; 
-            text-align: center; 
-            background: var(--primary); 
-            color: white; 
-            border: none;
-        }
-        .lab6-grup a:hover { 
-            background: var(--primary-hover); 
-            color: white; 
-            transform: translateY(-2px);
-        }
-
-        /* Hafta 7 özel butonu */
+        .lab-link-kutu a:hover { border-color: var(--primary); color: var(--primary); transform: translateX(4px); }
         .hafta7-btn {
-            display: block;
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            color: white !important;
-            text-decoration: none;
-            padding: 14px 20px !important;
-            border-radius: 10px !important;
-            font-size: 0.95rem !important;
-            font-weight: 700 !important;
+            background: linear-gradient(135deg, var(--primary), var(--accent)) !important;
+            color: #fff !important;
             border: none !important;
-            text-align: center;
-            transition: all 0.3s ease !important;
-            margin-top: 5px;
-            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+            box-shadow: 0 4px 14px rgba(37,99,235,0.3);
         }
-        .hafta7-btn:hover {
-            transform: translateY(-3px) !important;
-            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.4) !important;
-            color: white !important;
-        }
-
-        footer {
-            text-align: center;
-            font-size: 0.85rem;
-            color: var(--text-ikincil);
-            padding-top: 30px;
-            border-top: 1px solid var(--border);
-            margin-top: 35px;
-        }
-
-        .iletisim-panel { display: none; animation: fadeIn 0.5s ease; }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .iletisim-panel h1 {
-            text-align: center;
-            font-size: 1.8rem;
-            color: var(--text-ana);
-            margin-bottom: 30px;
-        }
-
-        .contact-container { width: 100%; max-width: 600px; margin: auto; }
-
-        label {
-            display: block;
-            font-size: 0.85rem;
-            font-weight: 700;
-            color: var(--text-ana);
-            margin-bottom: 8px;
-        }
-
-        input[type="text"], input[type="email"], input[type="password"], select, textarea {
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 20px;
-            border: 2px solid var(--border);
-            border-radius: 10px;
-            font-size: 0.95rem;
-            background: #fcfdfe;
-            outline: none;
-            transition: all 0.3s;
-        }
-
-        input:focus, select:focus, textarea:focus { 
-            border-color: var(--primary); 
-            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
-        }
-
-        .grup-kutu {
-            background: var(--ana-bg);
-            border-radius: 10px;
-            padding: 15px;
-            margin-bottom: 20px;
-            border: 1px solid var(--border);
-        }
-
-        .grup-kutu label {
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            cursor: pointer;
-            margin-bottom: 8px;
-        }
-
-        .btn-row { display: flex; gap: 15px; margin-top: 10px; }
-        .btn-gonder {
-            flex: 2;
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: 14px;
-            font-weight: 700;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-        .btn-temizle {
-            flex: 1;
-            background: #f1f5f9;
-            color: var(--danger);
-            border: 1px solid var(--border);
-            padding: 14px;
-            font-weight: 700;
-            border-radius: 10px;
-            cursor: pointer;
-        }
-        .btn-gonder:hover { background: var(--primary-hover); }
-        .btn-temizle:hover { background: #fee2e2; }
-
-        @media (max-width: 768px) {
-            .sutunlar { flex-direction: column; }
-            .sayfa { margin: 10px; padding: 20px; }
-        }
+        .hafta7-btn:hover { transform: translateY(-2px) !important; box-shadow: 0 8px 20px rgba(37,99,235,0.4) !important; }
+        .sosyal-linkler { list-style: none; padding: 0; }
+        .sosyal-linkler li { margin-bottom: 10px; }
+        .sosyal-linkler a { text-decoration: none; font-size: 0.9rem; color: var(--primary); font-weight: 600; display: flex; align-items: center; gap: 8px; transition: color 0.3s; }
+        .sosyal-linkler a:hover { color: var(--accent); }
+        .lab6-grup { display: flex; gap: 10px; }
+        .lab6-grup a { flex: 1; text-align: center; background: var(--primary) !important; color: #fff !important; border: none !important; }
+        .lab6-grup a:hover { background: #1d4ed8 !important; transform: translateY(-2px) !important; }
+        .iletisim-panel { display: none; }
+        @keyframes fadeIn { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
+        @media (max-width: 768px) { .sayfa { margin: 10px; padding: 20px; } }
     </style>
 </head>
 <body>
 
-    <nav>
-        <span class="logo">Merve Sueda Aydın</span>
-        <ul>
-            <li><a href="#" class="aktif" id="nav-ana" onclick="goster('ana'); return false;">Ana Sayfa</a></li>
-            <li><a href="#" onclick="goster('ana'); return false;">Hakkımda</a></li>
-            <li><a href="#" onclick="goster('ana'); return false;">Projeler</a></li>
-            <li><a href="#" id="nav-iletisim" onclick="goster('iletisim'); return false;">İletişim</a></li>
-        </ul>
+    <!-- Bootstrap Navbar — navbar-dark bg-dark (tüm sayfalarla aynı) -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top shadow-sm">
+        <div class="container-fluid px-4">
+            <span class="navbar-brand fw-bold">Merve Sueda Aydın</span>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navIndex">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navIndex">
+                <ul class="navbar-nav ms-auto gap-1">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#" id="nav-ana" onclick="goster('ana'); return false;">Ana Sayfa</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="goster('ana'); return false;">Hakkımda</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="goster('ana'); return false;">Projeler</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" id="nav-iletisim" onclick="goster('iletisim'); return false;">İletişim</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </nav>
 
+    <!-- Ana Panel -->
     <div class="sayfa" id="ana-panel">
-        <p class="aciklama">
-            Merhaba, ben <span>Merve</span>. Bilgisayar Mühendisliği 3. sınıf öğrencisiyim. 
+        <p style="font-size:1.1rem; color:#1e293b; margin-bottom:25px; padding-bottom:20px; border-bottom:2px solid #f4f7fa; font-weight:500;">
+            Merhaba, ben <span style="color:#2563eb; font-weight:700;">Merve</span>. Bilgisayar Mühendisliği 3. sınıf öğrencisiyim.
             Yapay zeka ve veri analizi alanlarına ilgi duyuyorum. Web dünyasına bu portfolyo ile ilk adımı attım.
         </p>
 
-        <div class="sutunlar">
-            <section class="icerik">
-                <h2>🚀 İçerik ve Gelişim</h2>
-                <p>
-                    Bu web sitesi, HTML ve CSS temellerini öğrenirken geliştirdiğim dinamik bir yapıdır. 
+        <div class="d-flex gap-4 flex-wrap">
+            <section class="icerik-kutu flex-grow-1" style="flex-basis:55%;">
+                <h2 style="font-size:1.1rem; color:#1e293b; margin-bottom:15px; display:flex; align-items:center; gap:8px;">🚀 İçerik ve Gelişim</h2>
+                <p style="font-size:0.95rem; color:#64748b; margin-bottom:12px;">
+                    Bu web sitesi, HTML ve CSS temellerini öğrenirken geliştirdiğim dinamik bir yapıdır.
                     Grup seçiciler ve modern layout sistemlerini kullanarak görsel hiyerarşiyi kurguladım.
                 </p>
-                <p>
-                    Şu an <strong>JavaScript</strong> ile kullanıcı etkileşimli uygulamalar geliştiriyor, 
+                <p style="font-size:0.95rem; color:#64748b; margin-bottom:0;">
+                    Şu an <strong>JavaScript</strong> ile kullanıcı etkileşimli uygulamalar geliştiriyor,
                     mantıksal algoritmaları arayüzlere döküyorum.
                 </p>
 
                 <div class="lab-link-kutu">
-                    <a href="flexbox.html" target="_blank">🔗 Lab 4 — Flexbox Uygulaması</a>
+                    <a href="flexbox.html">🔗 Lab 4 — Flexbox Uygulaması</a>
                     <a href="lab-position.html">📌 Lab 5 — CSS Position Duyuru Kartı</a>
 
-                    <p class="lab6-etiket">🧪 JavaScript Laboratuvarı</p>
+                    <p style="font-size:0.78rem; text-transform:uppercase; letter-spacing:1px; color:#64748b; font-weight:700; margin:5px 0 0;">🧪 JavaScript Laboratuvarı</p>
                     <div class="lab6-grup">
                         <a href="uygulama1.html">📊 Not Hesaplama</a>
                         <a href="uygulama2.html">🔄 Birim Dönüştürücü</a>
                     </div>
 
-                    <p class="lab6-etiket">⚡ Hafta 7 Laboratuvarı</p>
-                    <a href="hafta7.html" class="hafta7-btn">🎯 Hafta 7 Uygulamasına Git</a>
+                    <p style="font-size:0.78rem; text-transform:uppercase; letter-spacing:1px; color:#64748b; font-weight:700; margin:5px 0 0;">⚡ Hafta 7 Laboratuvarı</p>
+                    <a href="hafta7.html" class="hafta7-btn" style="text-align:center;">🎯 Hafta 7 Uygulamasına Git</a>
                 </div>
             </section>
 
-            <aside>
-                <h2>ℹ️ Bilgi Paneli</h2>
-                <p>
-                    CSS Box Model yapısını kullanarak alanları (padding/margin) optimize ettim. 
+            <aside class="bilgi-kutu flex-grow-1" style="flex-basis:35%;">
+                <h2 style="font-size:1.1rem; color:#1e293b; margin-bottom:15px; display:flex; align-items:center; gap:8px;">ℹ️ Bilgi Paneli</h2>
+                <p style="font-size:0.95rem; color:#64748b; margin-bottom:15px;">
+                    CSS Box Model yapısını kullanarak alanları (padding/margin) optimize ettim.
                     Grid ve Flexbox yapıları ile duyarlı (responsive) bir tasarım hedefledim.
                 </p>
-
                 <ul class="sosyal-linkler">
                     <li><a href="https://github.com/mervesueda" target="_blank">⬡ GitHub</a></li>
                     <li><a href="https://linkedin.com/in/mervesuedaaydin" target="_blank">in LinkedIn</a></li>
@@ -368,69 +150,66 @@
             </aside>
         </div>
 
-        <footer>
+        <footer class="text-center mt-4 pt-4 border-top" style="font-size:0.85rem; color:#64748b;">
             &copy; 2026 Merve Sueda Aydın | Mühendislik Portfolyosu
         </footer>
     </div>
 
+    <!-- İletişim Paneli -->
     <div class="sayfa iletisim-panel" id="iletisim-panel">
-        <h1>Bana Ulaşın</h1>
-        <div class="contact-container">
-            <label for="ad">Ad Soyad</label>
-            <input type="text" id="ad" placeholder="Adınız ve Soyadınız">
+        <h1 class="text-center mb-4" style="font-size:1.8rem; color:#1e293b;">Bana Ulaşın</h1>
+        <div style="width:100%; max-width:600px; margin:auto;">
+            <label class="d-block mb-1" style="font-size:0.85rem; font-weight:700;">Ad Soyad</label>
+            <input type="text" id="ad" class="form-control mb-3" placeholder="Adınız ve Soyadınız">
 
-            <label for="eposta">E-posta Adresi</label>
-            <input type="email" id="eposta" placeholder="ornek@mail.com">
+            <label class="d-block mb-1" style="font-size:0.85rem; font-weight:700;">E-posta Adresi</label>
+            <input type="email" id="eposta" class="form-control mb-3" placeholder="ornek@mail.com">
 
-            <label for="sifre">Başvuru Takip Şifresi</label>
-            <input type="password" id="sifre" placeholder="Şifre belirleyin">
+            <label class="d-block mb-1" style="font-size:0.85rem; font-weight:700;">Başvuru Takip Şifresi</label>
+            <input type="password" id="sifre" class="form-control mb-3" placeholder="Şifre belirleyin">
 
-            <label>İletişim Tercihi</label>
-            <div class="grup-kutu">
-                <label><input type="radio" name="tercih" checked> E-posta</label>
-                <label><input type="radio" name="tercih"> Telefon</label>
+            <label class="d-block mb-1" style="font-size:0.85rem; font-weight:700;">İletişim Tercihi</label>
+            <div class="bg-light border rounded p-3 mb-3">
+                <div class="form-check"><input class="form-check-input" type="radio" name="tercih" checked><label class="form-check-label">E-posta</label></div>
+                <div class="form-check"><input class="form-check-input" type="radio" name="tercih"><label class="form-check-label">Telefon</label></div>
             </div>
 
-            <label>İlgi Alanları</label>
-            <div class="grup-kutu">
-                <label><input type="checkbox"> HTML/CSS</label>
-                <label><input type="checkbox"> Veri Bilimi</label>
-                <label><input type="checkbox"> Yapay Zeka</label>
+            <label class="d-block mb-1" style="font-size:0.85rem; font-weight:700;">İlgi Alanları</label>
+            <div class="bg-light border rounded p-3 mb-3">
+                <div class="form-check"><input class="form-check-input" type="checkbox"><label class="form-check-label">HTML/CSS</label></div>
+                <div class="form-check"><input class="form-check-input" type="checkbox"><label class="form-check-label">Veri Bilimi</label></div>
+                <div class="form-check"><input class="form-check-input" type="checkbox"><label class="form-check-label">Yapay Zeka</label></div>
             </div>
 
-            <label for="konu">Konu</label>
-            <select id="konu">
+            <label class="d-block mb-1" style="font-size:0.85rem; font-weight:700;">Konu</label>
+            <select id="konu" class="form-select mb-3">
                 <option value="">Seçiniz...</option>
                 <option>İş Teklifi</option>
                 <option>Akademik Soru</option>
                 <option>Genel Mesaj</option>
             </select>
 
-            <label for="dosya">CV Yükle</label>
-            <input type="file" id="dosya">
+            <label class="d-block mb-1" style="font-size:0.85rem; font-weight:700;">Mesajınız</label>
+            <textarea id="mesaj" class="form-control mb-4" rows="4" placeholder="Mesajınızı buraya yazın..."></textarea>
 
-            <label for="mesaj">Mesajınız</label>
-            <textarea id="mesaj" placeholder="Mesajınızı buraya yazın..."></textarea>
-
-            <div class="btn-row">
-                <button class="btn-gonder">Mesajı Gönder</button>
-                <button class="btn-temizle" onclick="temizle(); return false;">Temizle</button>
+            <div class="d-flex gap-3">
+                <button class="btn btn-primary fw-bold flex-grow-1">Mesajı Gönder</button>
+                <button class="btn btn-outline-danger" onclick="temizle(); return false;">Temizle</button>
             </div>
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         function goster(panel) {
             document.getElementById('ana-panel').style.display = panel === 'ana' ? 'block' : 'none';
             document.getElementById('iletisim-panel').style.display = panel === 'iletisim' ? 'block' : 'none';
-            
-            document.getElementById('nav-ana').classList.toggle('aktif', panel === 'ana');
-            document.getElementById('nav-iletisim').classList.toggle('aktif', panel === 'iletisim');
+            document.getElementById('nav-ana').classList.toggle('active', panel === 'ana');
+            document.getElementById('nav-iletisim').classList.toggle('active', panel === 'iletisim');
         }
-
         function temizle() {
             document.querySelectorAll('input, select, textarea').forEach(el => {
-                if(el.type === 'radio' || el.type === 'checkbox') el.checked = false;
+                if (el.type === 'radio' || el.type === 'checkbox') el.checked = false;
                 else el.value = '';
             });
         }
